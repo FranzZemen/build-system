@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ESNext",
+    "moduleResolution": "NodeNext",
+    "tsBuildInfoFile": "../../out/buildInfo/tsbuildinfo",
+    "declarationDir": "../../out/dist/types",
+    "outDir": "../../out/dist"
+  },
+  "include": ["**/*"],
+  "exclude": ["./bin"]
+}
