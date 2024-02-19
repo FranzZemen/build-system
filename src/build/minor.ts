@@ -6,7 +6,7 @@ License Type: MIT
 
 import {executePipeline} from "./execute-pipeline.js";
 
-executePipeline('patch');
+executePipeline('major');
 
 
 

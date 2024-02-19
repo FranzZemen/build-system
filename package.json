@@ -1,6 +1,6 @@
 {
   "name": "@franzzemen/build-system",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Build System",
   "main": "index.js",
   "type": "module",
@@ -35,7 +35,9 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "patch": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/patch.js"
+    "patch": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/patch.js",
+    "minor": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/minor.js",
+    "major": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/major.js"
   },
   "imports": {
     "#project": {

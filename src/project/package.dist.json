@@ -1,6 +1,6 @@
 {
   "name": "@franzzemen/build-system",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Build System",
   "main": "index.js",
   "repository": {
@@ -17,7 +17,6 @@
     "url": "https://github.com/FranzZemen/build-system/issues"
   },
   "homepage": "https://github.com/FranzZemen/build-system#readme",
-
   "dependencies": {
     "del": "^7.1.0",
     "fastest-validator": "^1.17.0",
