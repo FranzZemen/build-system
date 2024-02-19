@@ -39,7 +39,7 @@ export class NpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement
                                       cwd: './'
                                     })
           .then(result => {
-            rollbackSteps.splice(0, 0, `rollback ./package.json to version ${thePackage.version}`);
+            rollbackSteps.splice(0, 0, `rollback ./package.json to version ${thePackage.version} in git`);
             return readFileAsJson('./package.json', packageIsBasePackage)
               .then(mainPackage => {
                 return readFileAsJson('./src/project/package.dist.json', packageIsBasePackage)
@@ -51,11 +51,14 @@ export class NpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement
                       this.contextLog.error(errMsg);
                       throw new BuildError(errMsg, undefined, BuildErrorNumber.PackageNotVersioned);
                     }
-                    rollbackSteps.splice(0, 0, `rollback ./src/project/package.dist.json to version ${thePackage.version}`);
                     return writeFile('./src/project/package.dist.json', JSON.stringify(distPackage, null, 2), 'utf8')
                       .then(() => {
+                        rollbackSteps.splice(0, 0, `rollback ./src/project/package.dist.json to version ${thePackage.version}`);
                         return writeFile('./out/project/package.json', JSON.stringify(distPackage, null, 2), 'utf8')
-                          .then(() => distPackage);
+                          .then(() => {
+                            rollbackSteps.splice(0, 0, `rollback ./out/project/package.json to version ${thePackage.version}`);
+                            return distPackage;
+                          });
                       });
                   });
               });

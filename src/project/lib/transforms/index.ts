@@ -4,3 +4,6 @@ License Type: MIT
 */
 
 export * from './npm-version.transform.js';
+export * from './check-in.transform.js';
+export * from './commit.transform.js';
+export * from './push-branch.transform.js';

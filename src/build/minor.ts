@@ -4,9 +4,9 @@ License Type: MIT
 */
 
 
-import {executePipeline} from "./execute-pipeline.js";
+import {executeFulllPipeline} from "./execute-fulll-pipeline.js";
 
-executePipeline('major');
+executeFulllPipeline('major');
 
 
 

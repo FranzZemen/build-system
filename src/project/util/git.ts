@@ -2,7 +2,7 @@
 Created by Franz Zemen 03/07/2023
 License Type: 
 */
-/*
+
 import {simpleGit, SimpleGit, CommitResult, PushResult} from 'simple-git';
 
 export type GitCommitResult = CommitResult;
@@ -50,4 +50,3 @@ export function getGitImplementation(): Git {return gitImplementation}
 export function git(): Git {
   return gitImplementation;
 }
-*/

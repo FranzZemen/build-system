@@ -21,6 +21,7 @@
     "del": "^7.1.0",
     "fastest-validator": "^1.17.0",
     "lodash": "^4.17.21",
+    "simple-git": "^3.22.0",
     "spdx-license-ids": "^3.0.17",
     "tslib": "^2.6.2",
     "uuid": "^9.0.1"
