@@ -1,2 +1,5 @@
 node_modules
 out
+.idea
+bs.backup
+project-init-undo.txt

@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "description": "Build System",
   "main": "index.js",
-  "type": "module",
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FranzZemen/build-system.git"
@@ -19,31 +17,17 @@
     "url": "https://github.com/FranzZemen/build-system/issues"
   },
   "homepage": "https://github.com/FranzZemen/build-system#readme",
-  "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.19",
-    "@types/uuid": "^9.0.8"
-  },
+
   "dependencies": {
-    "@franzzemen/build-system": "file:out/dist",
     "del": "^7.1.0",
     "fastest-validator": "^1.17.0",
     "lodash": "^4.17.21",
-    "package-name-regex": "^3.1.1",
-    "semver-regex": "^4.0.5",
     "spdx-license-ids": "^3.0.17",
     "tslib": "^2.6.2",
     "uuid": "^9.0.1"
   },
-  "scripts": {
-    "patch": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/patch.js"
-  },
-  "imports": {
-    "#project": {
-      "import": {
-        "types": "./out/project/types/index.d.ts",
-        "default": "./out/project/index.js"
-      }
-    }
+  "type": "module",
+  "bin": {
+    "bs.init": "./bin/init.js"
   }
 }
