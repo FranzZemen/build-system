@@ -52,8 +52,11 @@ export class NpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement
                       throw new BuildError(errMsg, undefined, BuildErrorNumber.PackageNotVersioned);
                     }
                     rollbackSteps.splice(0, 0, `rollback ./src/project/package.dist.json to version ${thePackage.version}`);
-                    return writeFile('./out/project/package.json', JSON.stringify(distPackage, null, 2), 'utf8')
-                      .then(() => distPackage);
+                    return writeFile('./src/project/package.dist.json', JSON.stringify(distPackage, null, 2), 'utf8')
+                      .then(() => {
+                        return writeFile('./out/project/package.json', JSON.stringify(distPackage, null, 2), 'utf8')
+                          .then(() => distPackage);
+                      });
                   });
               });
           });
