@@ -2,9 +2,7 @@
   "files": [],
   "include": [],
   "references": [
-    {
-      "path": "./src/project/tsconfig.json",
-      "path": "./src/build/tsconfig.json"
-    }
+    {"path": "./src/project/tsconfig.json"},
+    {"path": "./src/build/tsconfig.json"}
   ]
 }
