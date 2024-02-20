@@ -9,8 +9,11 @@ import {inspect} from "node:util";
 import {analyze} from "../util/index.js";
 import {Log} from "../log/index.js";
 
+const log = new Log(0);
 await analyze()
   .then((analysis) =>{
-    const log = new Log(0);
     log.info(inspect(analysis, false, 10, true));
+  })
+  .catch((error) => {
+    log.error(error);
   });
