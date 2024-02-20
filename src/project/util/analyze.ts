@@ -69,7 +69,7 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
     .then(() => buildSystemAnalysis.packageJsonExists = true)
     .catch(() => buildSystemAnalysis.packageJsonExists = false);
   let rootPackage: Package = {};
-  if(!buildSystemAnalysis.packageJsonExists) {
+  if(buildSystemAnalysis.packageJsonExists) {
     rootPackage = await readFileAsJson<Package>('./package.json')
       .then(rootPackage => {
         console.log(inspect(rootPackage, false, 10, true));
