@@ -132,11 +132,11 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
       buildSystemAnalysis.tsconfigProjectModule = false;
     }
     // --> Check that it outputs to ./out/project
-    buildSystemAnalysis.tsconfigProjectOutput = tsconfig.compilerOptions?.outDir === './out/project';
+    buildSystemAnalysis.tsconfigProjectOutput = tsconfig.compilerOptions?.outDir === '../../out/project';
     // --> Check that it has build info entry
-    buildSystemAnalysis.tsconfigProjectBuildInfo = tsconfig.compilerOptions?.tsBuildInfoFile !== undefined && tsconfig.compilerOptions.tsBuildInfoFile.startsWith('./out');
+    buildSystemAnalysis.tsconfigProjectBuildInfo = tsconfig.compilerOptions?.tsBuildInfoFile !== undefined && tsconfig.compilerOptions.tsBuildInfoFile.startsWith('../../out');
     // --> Check that it has a types entry somewhere under ./out/project
-    buildSystemAnalysis.tsconfigProjectTypes = tsconfig.compilerOptions?.types !== undefined && tsconfig.compilerOptions.types.includes('./out/project/types');
+    // buildSystemAnalysis.tsconfigProjectTypes = tsconfig.compilerOptions?.types !== undefined && tsconfig.compilerOptions.types.includes('./out/project/types');
   }
   // Check that ./src/test/tsconfig.json exists
   await access('./src/test/tsconfig.json')
@@ -153,11 +153,11 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
       buildSystemAnalysis.tsconfigTestModule = false;
     }
     // --> Check that it outputs to ./out/test
-    buildSystemAnalysis.tsconfigTestOutput = tsconfig.compilerOptions?.outDir === './out/test';
+    buildSystemAnalysis.tsconfigTestOutput = tsconfig.compilerOptions?.outDir === '../../out/test';
     // --> Check that it has build info entry
-    buildSystemAnalysis.tsconfigTestBuildInfo = tsconfig.compilerOptions?.tsBuildInfoFile !== undefined && tsconfig.compilerOptions.tsBuildInfoFile.startsWith('./out');
+    buildSystemAnalysis.tsconfigTestBuildInfo = tsconfig.compilerOptions?.tsBuildInfoFile !== undefined && tsconfig.compilerOptions.tsBuildInfoFile.startsWith('../../out');
     // --> Check that it has a types entry somewhere under ./out/test
-    buildSystemAnalysis.tsconfigTestTypes = tsconfig.compilerOptions?.types !== undefined && tsconfig.compilerOptions.types.includes('./out/test/types');
+    // buildSystemAnalysis.tsconfigTestTypes = tsconfig.compilerOptions?.types !== undefined && tsconfig.compilerOptions.types.includes('./out/test/types');
     // Check that ./src/test/package.dist.json exists
     await access('./src/test/package.dist.json')
       .then(() => buildSystemAnalysis.packageDistJsonExists = true)
