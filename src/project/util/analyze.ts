@@ -46,7 +46,11 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
   // Check if git is initialized (root repo)
   buildSystemAnalysis.gitInitialized = await git().checkIsRepo();
   // Check that an origin remote exists
-  buildSystemAnalysis.remoteExists = (await git().getRemotes()).includes('origin');
+  if(buildSystemAnalysis.gitInitialized) {
+    buildSystemAnalysis.remoteExists = (await git().getRemotes()).includes('origin');
+  } else {
+    buildSystemAnalysis.remoteExists = false;
+  }
   // Check if the src folder exists
   await access('./src')
     .then(() => buildSystemAnalysis.srcFolderExists = true)
