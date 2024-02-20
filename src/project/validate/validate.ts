@@ -36,16 +36,18 @@ export function compileSync(schema: ValidationSchema, validatorOptions?: Validat
   }
 }
 
-export function validate<T>(t: T | unknown, checkFunction: SyncCheckFunction, validatedTypeName: ValidatedTypeName = 'unknown'): boolean {
+export function validate<T>(t: T | unknown, checkFunction: SyncCheckFunction, validatedTypeName: ValidatedTypeName = 'unknown', throwIfInvalid: boolean = true): boolean | ValidationError[] {
   const result: true | ValidationError[] = checkFunction(t);
   if(result === true) {
     return true;
-  } else {
+  } else if(throwIfInvalid) {
     const log: Log = new Log();
     const name = t
     const errorMsg = `Validation failure for object type ${validatedTypeName}`;
     log.error(errorMsg);
     log.warn(inspect(result,false,10,true));
     throw new BuildError(errorMsg);
+  } else {
+    return result;
   }
 }

@@ -22,7 +22,8 @@
     "@types/inquirer": "^9.0.7",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.11.19",
-    "@types/uuid": "^9.0.8"
+    "@types/uuid": "^9.0.8",
+    "tsconfig.d.ts": "^0.1.20"
   },
   "dependencies": {
     "@franzzemen/build-system": "file:out/dist",

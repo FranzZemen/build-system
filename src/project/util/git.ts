@@ -3,7 +3,7 @@ Created by Franz Zemen 03/07/2023
 License Type: 
 */
 
-import {simpleGit, SimpleGit, CommitResult, PushResult} from 'simple-git';
+import {simpleGit, SimpleGit, CommitResult, PushResult, RemoteWithoutRefs} from 'simple-git';
 
 export type GitCommitResult = CommitResult;
 
@@ -12,6 +12,8 @@ export interface Git {
   commit(comment: string): Promise<GitCommitResult>;
   push(): Promise<PushResult>;
   currentBranch(): Promise<string>;
+  checkIsRepo(): Promise<boolean>;
+  getRemotes(): Promise<string[]>;
 }
 
 class SimpleGitWrapper implements Git {
@@ -32,6 +34,15 @@ class SimpleGitWrapper implements Git {
 
   currentBranch(): Promise<string> {
     return this.git.branch().then(summary => summary.current);
+  }
+
+  checkIsRepo(): Promise<boolean> {
+    return this.git.checkIsRepo();
+  }
+
+  async getRemotes(): Promise<string[]> {
+    let remotes = await this.git.getRemotes();
+    return remotes.map(remote => remote.name);
   }
 }
 

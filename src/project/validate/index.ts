@@ -7,3 +7,4 @@ export * from './get-validator.cjs';
 export * from './package.js';
 export * from './validate.js';
 export * from './t-is-T.js';
+export * from './tsconfig.js';

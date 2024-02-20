@@ -14,3 +14,4 @@ export * from './read-file-as-json.js';
 export * from './executable.js';
 export * from './create-file.js';
 export * from './create-directory.js';
+export * from './analyze.js';

@@ -7,7 +7,7 @@ export async function readFileAsJson<T>(filename: string, tIsT?: tIsT<T>): Promi
     .then(fileContents => {
       const t = JSON.parse(fileContents);
       if (tIsT) {
-        if (tIsT(t)) {
+        if (tIsT(t, true)) {
           return t as T;
         } else {
           // This will never happen, as tIsT if based on a validator will already throw.  But might implement tIsT that doesn't throw.

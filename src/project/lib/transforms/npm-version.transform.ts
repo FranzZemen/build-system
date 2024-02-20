@@ -3,10 +3,9 @@ Created by Franz Zemen 04/30/2023
 License Type: MIT
 */
 
-import {Package} from '../../options/index.js';
 import {BuildError, BuildErrorNumber, Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
 import {TransformPayloadOut} from "../../pipeline/index.js";
-import {packageIsBasePackage} from "../../validate/index.js";
+import {Package, packageIsBasePackage} from "../../validate/index.js";
 import {writeFile} from "fs/promises";
 
 export type NpmVersionIncrement = 'patch' | 'minor' | 'major';
