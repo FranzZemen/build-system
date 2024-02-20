@@ -8,6 +8,7 @@ import {access} from "fs/promises";
 import {readFileAsJson} from "./read-file-as-json.js";
 import {Package} from "../validate/index.js";
 import {TsConfig} from "tsconfig.d.ts";
+import {inspect} from "node:util";
 
 export type BuildSystemAnalysis = {
   gitInitialized?: boolean;
@@ -71,6 +72,7 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
   if(!buildSystemAnalysis.packageJsonExists) {
     rootPackage = await readFileAsJson<Package>('./package.json')
       .then(rootPackage => {
+        console.log(inspect(rootPackage, false, 10, true));
         // --> Check if type=module is set
         buildSystemAnalysis.packageJsonTypeModule = rootPackage.type === 'module';
         // --> Check if version is set
