@@ -143,9 +143,9 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
     .then(() => buildSystemAnalysis.tsconfigTestExists = true)
     .catch(() => buildSystemAnalysis.tsconfigTestExists = false);
   if(buildSystemAnalysis.tsconfigTestExists) {
-    const tsconfig = await readFileAsJson<TsConfig>('../../tsconfig.base.json');
+    const tsconfig = await readFileAsJson<TsConfig>('./src/test/tsconfig.json');
     // --> Check that it extends ./tsconfig.base.json
-    buildSystemAnalysis.tsconfigTestExtendsBase = tsconfig.extends === './tsconfig.base.json';
+    buildSystemAnalysis.tsconfigTestExtendsBase = tsconfig.extends === '../../tsconfig.base.json';
     // --> Check that it uses module=NodeNext or Node16
     if(tsconfig.compilerOptions?.moduleResolution !== undefined) {
       buildSystemAnalysis.tsconfigTestModule = tsconfig.compilerOptions.moduleResolution.toLocaleLowerCase() === 'nodenext' || tsconfig.compilerOptions.moduleResolution.toLocaleLowerCase() === 'node16';
