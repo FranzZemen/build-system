@@ -159,13 +159,13 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
     // --> Check that it has a types entry somewhere under ./out/test
     // buildSystemAnalysis.tsconfigTestTypes = tsconfig.compilerOptions?.types !== undefined && tsconfig.compilerOptions.types.includes('./out/test/types');
     // Check that ./src/test/package.dist.json exists
-    await access('./src/test/package.dist.json')
+    await access('./src/product/package.dist.json')
       .then(() => buildSystemAnalysis.packageDistJsonExists = true)
       .catch(() => buildSystemAnalysis.packageDistJsonExists = false);
     // --> Check that the bin entries exist
     let distPackage: Package = {}
     if(buildSystemAnalysis.packageDistJsonExists) {
-      distPackage = await readFileAsJson<Package>('./src/test/package.dist.json');
+      distPackage = await readFileAsJson<Package>('./src/product/package.dist.json');
     }
       /*
       if(distPackage.bin && distPackage.bin['build'] && distPackage.bin['patch'] && distPackage.bin['minor'] && distPackage.bin['major']) {
