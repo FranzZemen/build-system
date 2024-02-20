@@ -72,7 +72,6 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
   if(buildSystemAnalysis.packageJsonExists) {
     rootPackage = await readFileAsJson<Package>('./package.json')
       .then(rootPackage => {
-        console.log(inspect(rootPackage, false, 10, true));
         // --> Check if type=module is set
         buildSystemAnalysis.packageJsonTypeModule = rootPackage.type === 'module';
         // --> Check if version is set
@@ -86,7 +85,7 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
         buildSystemAnalysis.packageJsonExpectedImports =
           typesEntry !== undefined
           && defaultEntry !== undefined
-          && typesEntry === './out/project/types'
+          && typesEntry === './out/project/types/index.d.ts'
           && defaultEntry === './out/project/index.js';
         return rootPackage
       });
