@@ -29,6 +29,6 @@
   "type": "module",
   "bin": {
     "bs.analyze": "./bin/analyze.js",
-    "bs.init": "./bin/init.js"
+    "bs.clean": "./bin/clean.js"
   }
 }
