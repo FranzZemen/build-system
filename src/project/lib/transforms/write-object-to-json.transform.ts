@@ -21,6 +21,6 @@ export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFi
   }
 
   protected transformContext(pipeIn: any, passedIn: WriteObjectFileNamePayload | undefined): string {
-    return `writing ${passedIn ? passedIn.targetPath : ''}`;
+    return `writing ${passedIn ? passedIn.targetPath : './out/project/package.json'}`;
   }
 }
