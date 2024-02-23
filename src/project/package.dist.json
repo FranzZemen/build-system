@@ -28,7 +28,9 @@
   },
   "type": "module",
   "bin": {
+    "bs.get-package-config": "./bin/get-package-config.js",
     "bs.analyze": "./bin/analyze.js",
-    "bs.clean": "./bin/clean.js"
+    "bs.clean": "./bin/clean.js",
+    "bs.build": "./bin/build.js"
   }
 }

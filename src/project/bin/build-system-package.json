@@ -1,0 +1,14 @@
+{
+  "build-system": {
+    "overrides": {
+      "clean": "",
+      "build": "",
+      "patch": "",
+      "publish": ""
+    },
+    "hooks": {
+      "pre-clean": "",
+      "post-clean": ""
+    }
+  }
+}
