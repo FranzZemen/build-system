@@ -11,10 +11,3 @@ import {cleanPipeline} from "../lib/pipelines/clean.pipeline.js";
 
 await cleanPipeline.execute()
 
-
-/*
-const log = new Log();
-log.info('Deleting ./out ...');
-deleteSync('./out');
-log.info('... deleted ./out');
-*/
