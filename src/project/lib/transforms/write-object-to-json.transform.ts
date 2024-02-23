@@ -16,7 +16,7 @@ export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFi
     super(depth);
   }
 
-  protected executeImplPayloadIn(backoutSteps: string[], payload: WriteObjectFileNamePayload, input: any): Promise<void> {
+  protected executeImplPayloadIn(backoutSteps: string[], input: any, payload: WriteObjectFileNamePayload): Promise<void> {
     backoutSteps.splice(0, 0, `Undo write to ${payload.targetPath}`)
     return writeFile(payload.targetPath, JSON.stringify(input, null, 2))
       .catch(err => {
