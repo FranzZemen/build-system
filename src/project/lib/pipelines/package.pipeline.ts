@@ -21,5 +21,6 @@ export const packagePipeline = Pipeline
         }
       },
     }} as const)
-  .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const);
+  .transform(WriteObjectToJsonTransform, {targetPath: './out/package.json'} as const)
+  .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const)
 
