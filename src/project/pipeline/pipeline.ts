@@ -60,11 +60,17 @@ export class Pipeline<PIPELINE_IN, PIPELINE_OUT = PIPELINE_IN> {
     return new Pipeline<PIPELINE_IN, PIPELINE_OUT>(options);
   }
 
-  copy(newLogDepth?: number): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
+  copy(newName?: string, newLogDepth?: number): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
     const logDepth = newLogDepth ?? this.log.depth;
-    const pipeline = new Pipeline<PIPELINE_IN, PIPELINE_OUT>({name: this.name, logDepth});
+    const name = newName ?? this.name;
+    const pipeline = new Pipeline<PIPELINE_IN, PIPELINE_OUT>({name, logDepth});
     this._pipes.forEach(pipe => pipeline._pipes.push(pipe.copy(pipeline)));
     return pipeline;
+  }
+
+  append(pipeline: Pipeline<any, any>): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
+    this._pipes.forEach(pipe => pipeline._pipes.push(pipe.copy(pipeline)));
+    return this;
   }
 
 

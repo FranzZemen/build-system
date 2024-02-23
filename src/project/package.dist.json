@@ -36,7 +36,9 @@
     "bs.clean": "./bin/clean.js",
     "bs.transpile": "./bin/transpile.js",
     "bs.package": "./bin/package.js",
+    "bs.build": "./bin/build.js",
     "bs.commit": "./bin/commit.js",
-    "bs.build": "./bin/build.js"
+    "bs.push": "./bin/push.js",
+    "bs.publish": "./bin/publish.js",
   }
 }
