@@ -69,7 +69,7 @@ export class Pipeline<PIPELINE_IN, PIPELINE_OUT = PIPELINE_IN> {
   }
 
   append(pipeline: Pipeline<any, any>): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
-    this._pipes.forEach(pipe => pipeline._pipes.push(pipe.copy(pipeline)));
+    pipeline._pipes.forEach(pipe => this._pipes.push(pipe.copy(this)));
     return this;
   }
 
