@@ -39,6 +39,6 @@
     "bs.build": "./bin/build.js",
     "bs.commit": "./bin/commit.js",
     "bs.push": "./bin/push.js",
-    "bs.publish": "./bin/publish.js",
+    "bs.publish": "./bin/publish.js"
   }
 }
