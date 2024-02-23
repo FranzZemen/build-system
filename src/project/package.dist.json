@@ -35,6 +35,7 @@
     "bs.analyze": "./bin/analyze.js",
     "bs.clean": "./bin/clean.js",
     "bs.transpile": "./bin/transpile.js",
+    "bs.package": "./bin/package.js",
     "bs.build": "./bin/build.js"
   }
 }

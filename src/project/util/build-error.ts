@@ -26,6 +26,8 @@ export enum BuildErrorNumber {
   PackageNotVersioned    = 'Error 1000: Package is not versioned',
   // Miscellaneous
   VersionIsNotSemver     = 'Error 5000: Version string does not represent a semver',
+  // Transform errors
+  MissingPayload         = 'Error 6000: Missing payload',
 
 }
 
