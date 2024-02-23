@@ -14,6 +14,7 @@ export enum BuildErrorNumber {
   RmError                = 'Error 54: rm error',
   RmGlob                 = 'Error 55: rm glob error',
   FileAlreadyExists      = 'Error 56: File already exists',
+  WriteOjbectToJsonError = 'Error 57: Error writing jhson file',
 
 
   // Child Process Errors
