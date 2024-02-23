@@ -16,11 +16,21 @@ export const packagePipeline = Pipeline
   .transform(MaleateObjectTransform<Package>, {merge: {
       exports: {
         '.': {
-          types: './out/project/types/index.d.ts',
-          import: './out/project/index.js'
+          types: './types/index.d.ts',
+          import: './index.js'
         }
       },
     }} as const)
-  .transform(WriteObjectToJsonTransform, {targetPath: './out/package.json'} as const)
+  // Write the package for publication
   .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const)
+  .transform(MaleateObjectTransform<Package>, {merge: {
+      exports: {
+        '.': {
+          types: './project/types/index.d.ts',
+          import: './project/index.js'
+        }
+      },
+    }} as const)
+  // Write the package for testing
+  .transform(WriteObjectToJsonTransform, {targetPath: './out/package.json'} as const)
 
