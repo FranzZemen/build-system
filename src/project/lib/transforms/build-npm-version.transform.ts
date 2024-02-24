@@ -7,7 +7,8 @@ import {BuildError, BuildErrorNumber, Executable, ExecutablePayload, readFileAsJ
 import {TransformPayloadOut} from "../../pipeline/index.js";
 import {Package, packageIsBasePackage} from "../../validate/index.js";
 import {writeFile} from "fs/promises";
-import {NpmVersionIncrement} from "./build-npm-version.transform.js";
+
+export type NpmVersionIncrement = 'patch' | 'minor' | 'major';
 
 /**
  * Updates the npm version to the root package as well as the project package, then publishes the project package
@@ -38,7 +39,28 @@ export class BuildNpmVersionTransform extends TransformPayloadOut<NpmVersionIncr
                                     })
           .then(result => {
             rollbackSteps.splice(0, 0, `rollback ./package.json to version ${thePackage.version} in git`);
-            return readFileAsJson('./package.json', packageIsBasePackage);
+            return readFileAsJson('./package.json', packageIsBasePackage)
+              .then(mainPackage => {
+                return readFileAsJson('./src/project/package.dist.json', packageIsBasePackage)
+                  .then(distPackage => {
+                    if (mainPackage.version !== undefined) {
+                      distPackage.version = mainPackage.version;
+                    } else {
+                      const errMsg = 'main package version is undefined';
+                      this.contextLog.error(errMsg);
+                      throw new BuildError(errMsg, undefined, BuildErrorNumber.PackageNotVersioned);
+                    }
+                    return writeFile('./src/project/package.dist.json', JSON.stringify(distPackage, null, 2), 'utf8')
+                      .then(() => {
+                        rollbackSteps.splice(0, 0, `rollback ./src/project/package.dist.json to version ${thePackage.version}`);
+                        return writeFile('./out/project/package.json', JSON.stringify(distPackage, null, 2), 'utf8')
+                          .then(() => {
+                            rollbackSteps.splice(0, 0, `rollback ./out/project/package.json to version ${thePackage.version}`);
+                            return distPackage;
+                          });
+                      });
+                  });
+              });
           });
       });
   }

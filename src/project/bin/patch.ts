@@ -6,9 +6,9 @@ License Type: MIT
 */
 
 
-import {executeFulllPipeline} from "./execute-fulll-pipeline.js";
+import {executeFullPipeline} from "./execute-full-pipeline.js";
 
-await executeFulllPipeline('patch');
+await executeFullPipeline('patch');
 
 
 
