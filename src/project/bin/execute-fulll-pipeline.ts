@@ -3,10 +3,16 @@ Created by Franz Zemen 02/19/2024
 License Type: MIT
 */
 
-import {NpmVersionIncrement, Pipeline, NpmVersionTransform, CheckInTransform, CommitTransform, PushBranchTransform} from "#project";
 import inquirer from "inquirer";
-import {pushPipeline} from "../lib/pipelines/push.pipeline.js";
 import {buildPipeline} from "../lib/pipelines/build.pipeline.js";
+import {
+  CheckInTransform,
+  CommitTransform,
+  NpmVersionIncrement,
+  NpmVersionTransform,
+  PushBranchTransform
+} from "../lib/index.js";
+import {Pipeline} from "../pipeline/index.js";
 
 
 export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement) {
