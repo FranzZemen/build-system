@@ -7,7 +7,7 @@ import inquirer from "inquirer";
 import {buildPipeline} from "../lib/pipelines/build.pipeline.js";
 import {
   CheckInTransform,
-  CommitTransform,
+  CommitTransform, NpmPublishTransform,
   NpmVersionIncrement,
   NpmVersionTransform,
   PushBranchTransform
@@ -47,5 +47,6 @@ export async function executeFullPipeline(versionIncrement: NpmVersionIncrement)
     .transform(PushBranchTransform)
     // Update publish package
     .append(packagePipeline)
+    .transform(NpmPublishTransform)
     .execute();
 }

@@ -4,10 +4,11 @@ License Type: MIT
 */
 
 import {BuildError, BuildErrorNumber, Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
-import {TransformPayloadOut} from "../../pipeline/index.js";
+
 import {Package, packageIsBasePackage} from "../../validate/index.js";
 import {writeFile} from "fs/promises";
 import {NpmVersionIncrement} from "./build-npm-version.transform.js";
+import {TransformPayloadOut} from "../../pipeline/index.js";
 
 /**
  * Updates the npm version to the root package as well as the project package, then publishes the project package
