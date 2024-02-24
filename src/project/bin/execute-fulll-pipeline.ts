@@ -5,6 +5,8 @@ License Type: MIT
 
 import {NpmVersionIncrement, Pipeline, NpmVersionTransform, CheckInTransform, CommitTransform, PushBranchTransform} from "#project";
 import inquirer from "inquirer";
+import {pushPipeline} from "../lib/pipelines/push.pipeline.js";
+import {buildPipeline} from "../lib/pipelines/build.pipeline.js";
 
 
 export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement) {
@@ -22,6 +24,7 @@ export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement
     });
   await Pipeline
     .options({name: versionIncrement as string, logDepth: 0})
+    .append(buildPipeline)
     .transform(CheckInTransform)
     .transform(CommitTransform, {comment: `pre-version change: ${comment}`})
     .transform(NpmVersionTransform, versionIncrement)
