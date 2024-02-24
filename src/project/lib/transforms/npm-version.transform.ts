@@ -13,7 +13,7 @@ import {NpmVersionIncrement} from "./build-npm-version.transform.js";
  * Updates the npm version to the root package as well as the project package, then publishes the project package
  * to distribution out
  */
-export class BuildNpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement, Package> {
+export class NpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement, Package> {
   protected executable: Executable<ExecutablePayload>;
 
   constructor(depth: number) {

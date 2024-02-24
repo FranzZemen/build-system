@@ -9,7 +9,7 @@ import {
   CheckInTransform,
   CommitTransform,
   NpmVersionIncrement,
-  BuildNpmVersionTransform,
+  NpmVersionTransform,
   PushBranchTransform
 } from "../lib/index.js";
 import {Pipeline} from "../pipeline/index.js";
@@ -38,7 +38,7 @@ export async function executeFullPipeline(versionIncrement: NpmVersionIncrement)
     // Commit prior to versioning (npm requirement)
     .transform(CommitTransform, {comment: `pre-version change: ${comment}`})
     // Execute the versioning`
-    .transform(BuildNpmVersionTransform, versionIncrement)
+    .transform(NpmVersionTransform, versionIncrement)
     // Check in the version change
     .transform(CheckInTransform)
     // Commit post version change

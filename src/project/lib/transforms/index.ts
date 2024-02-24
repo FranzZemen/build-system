@@ -8,3 +8,4 @@ export * from './check-in.transform.js';
 export * from './commit.transform.js';
 export * from './push-branch.transform.js';
 export * from './executable.transform.js';
+export * from './npm-version.transform.js';
