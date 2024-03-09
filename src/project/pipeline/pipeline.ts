@@ -189,9 +189,7 @@ export class Pipeline<PIPELINE_IN, PIPELINE_OUT = PIPELINE_IN> {
     TRANSFORM_CLASS extends Transform<any, any, any>,
     PASSED_IN = undefined,
     PARALLEL_IN = PIPELINE_IN,
-    PARALLEL_OUT = PIPELINE_IN,
-    CONSTRUCTOR extends TransformConstructor<TRANSFORM_CLASS> = TransformConstructor<TRANSFORM_CLASS>>(constructor: CONSTRUCTOR,
-                                                                                                       payload?: PASSED_IN): ParallelPipe<PARALLEL_IN, PARALLEL_OUT> {
+    PARALLEL_OUT = PIPELINE_IN>(constructor: TransformConstructor<TRANSFORM_CLASS>, payload?: PASSED_IN): ParallelPipe<PARALLEL_IN, PARALLEL_OUT> {
     // ----- Declaration separator ----- //
     const parallelPipe = ParallelPipe.start<
       TRANSFORM_CLASS,
