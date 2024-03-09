@@ -10,6 +10,6 @@ export * from './transform-independent.js'
 export * from './transform-out.js';
 export * from './transform-payload-in.js';
 export * from './transform-payload-out.js';
-export * from './transform-task-encapsulated.js';
+export * from './transform-encapsulated-task.js';
 export * from './transform-task-payload.js'
 

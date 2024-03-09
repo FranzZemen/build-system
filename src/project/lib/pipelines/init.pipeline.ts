@@ -4,21 +4,16 @@ License Type: MIT
 */
 
 import {Pipeline} from "../../pipeline/index.js";
-import {TransformTaskEncapsulated} from "../../pipeline/transform/transform-task-encapsulated.js";
-import {checkESMProject} from "../tasks/check-esm-project.task.js";
-import {createBackupDirectory} from "../tasks/create-backup-diretory.task.js";
-import {TransformTaskPayload} from "../../pipeline/transform/transform-task-payload.js";
-import {backupFile} from "../tasks/backup-file.task.js";
-import {createRootTsConfig} from "../tasks/create-root-tsconfig.task.js";
 import {checkNewProject} from "../tasks/check-new-project.task.js";
+import {TransformEncapsulatedTaskOut} from "../../pipeline/transform/transform-encapsulated-task-out.js";
 
-export const initPipeline: Pipeline<void, void> = Pipeline
-  .options({name:'init', logDepth: 1})
-  .transform(TransformTaskEncapsulated, checkNewProject);
+export const initPipeline: Pipeline<void, boolean> = Pipeline
+  .options<void, boolean>({name:'init', logDepth: 1})
+  .transform(TransformEncapsulatedTaskOut<boolean>, checkNewProject);
   /*
-  .startSeries(TransformTaskEncapsulated, checkESMProject)
-  .series(TransformTaskEncapsulated, checkESMProject)
-  .series(TransformTaskEncapsulated, createBackupDirectory)
+  .startSeries(TransformEncapsulatedTask, checkESMProject)
+  .series(TransformEncapsulatedTask, checkESMProject)
+  .series(TransformEncapsulatedTask, createBackupDirectory)
   .series(TransformTaskPayload<string>, {task: backupFile, taskArgument: './tsconfig.json'})
-  .endSeries(TransformTaskEncapsulated, createRootTsConfig)
+  .endSeries(TransformEncapsulatedTask, createRootTsConfig)
   */

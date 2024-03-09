@@ -8,7 +8,7 @@ import {EncapsulatedTask} from "../task/task.js";
 import {TransformPayload} from "./transform-payload.js";
 import {BuildError} from "../../util/index.js";
 
-export class TransformTaskEncapsulated extends TransformPayload<EncapsulatedTask> {
+export class TransformEncapsulatedTask extends TransformPayload<EncapsulatedTask> {
   constructor(depth: number) {
     super(depth);
   }
