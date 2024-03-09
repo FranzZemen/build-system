@@ -33,6 +33,7 @@
   "type": "module",
   "bin": {
     "bs.get-package-config": "./bin/get-package-config.js",
+    "bs.git-init": "./bin/git-init.js",
     "bs.analyze": "./bin/analyze.js",
     "bs.clean": "./bin/clean.js",
     "bs.transpile": "./bin/transpile.js",

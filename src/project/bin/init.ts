@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
-Created by Franz Zemen 02/18/2024
+Created by Franz Zemen 03/09/2024
 License Type: MIT
 */
 

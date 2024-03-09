@@ -10,12 +10,15 @@ import {createBackupDirectory} from "../tasks/create-backup-diretory.task.js";
 import {TransformTaskPayload} from "../../pipeline/transform/transform-task-payload.js";
 import {backupFile} from "../tasks/backup-file.task.js";
 import {createRootTsConfig} from "../tasks/create-root-tsconfig.task.js";
+import {checkNewProject} from "../tasks/check-new-project.task.js";
 
 export const initPipeline: Pipeline<void, void> = Pipeline
   .options({name:'init', logDepth: 1})
+  .transform(TransformTaskEncapsulated, checkNewProject);
+  /*
   .startSeries(TransformTaskEncapsulated, checkESMProject)
   .series(TransformTaskEncapsulated, checkESMProject)
   .series(TransformTaskEncapsulated, createBackupDirectory)
   .series(TransformTaskPayload<string>, {task: backupFile, taskArgument: './tsconfig.json'})
   .endSeries(TransformTaskEncapsulated, createRootTsConfig)
-
+  */

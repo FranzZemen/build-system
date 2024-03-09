@@ -190,37 +190,39 @@ export class Log implements LogInterface {
   // public resetConsole() {this.console = console;};
 
 
-  error(data: Error | string) { // Force that error is always an Error or a string
+  error(data?: Error | string) { // Force that error is always an Error or a string
     if (data && this.logLevelValue <= logLevelValues.error) {
       this.errorImpl(data, 'error');
     }
   }
 
-  trace(data: any) {
+  trace(data?: any) {
     if (data && this.logLevelValue <= logLevelValues.trace) {
       this.errorImpl(data, 'trace');
     }
   }
 
-  warn(data: any) {
+  warn(data?: any) {
     if (data && this.logLevelValue <= logLevelValues.warn) {
       this.errorImpl(data, 'warn');
     }
   }
 
-  info(data: any, treatment?: LogTreatmentName) {
+  info(data?: any, treatment?: LogTreatmentName) {
     if (data && this.logLevelValue <= logLevelValues.info) {
       this._log(data, 'info', treatment ? treatment : 'info');
+    } else {
+      this._log('', 'info', treatment ? treatment : 'info');
     }
   }
 
-  infoSegments(dataSegments: LogDataSegment[], treatment: LogTreatmentName = 'info') {
+  infoSegments(dataSegments?: LogDataSegment[], treatment: LogTreatmentName = 'info') {
     if (dataSegments && this.logLevelValue <= logLevelValues.info) {
       this._logSegments(dataSegments, 'info');
     }
   }
 
-  debug(data: any, treatment?: LogTreatmentName) {
+  debug(data?: any, treatment?: LogTreatmentName) {
     if (data && this.logLevelValue <= logLevelValues.debug) {
       this._log(data, 'debug', treatment ? treatment : 'debug');
     }
@@ -320,7 +322,6 @@ export class Log implements LogInterface {
     result += resetStr;
     result += this.color(treatment) + message;
     result += ConsoleCode.Reset;
-    result += resetStr;
     return result;
   }
 

@@ -12,9 +12,12 @@ import {TsConfig} from "tsconfig.d.ts";
 export type BuildSystemAnalysis = {
   gitInitialized?: boolean;
   remoteExists?: boolean;
-  srcFolderExists?: boolean;
+  srcDirectoryExists?: boolean;
   projectFolderExists?: boolean;
   testFolderExists?: boolean;
+  ignoreExists?: boolean;
+  licenseExists?: boolean;
+  readmeExists?: boolean;
   packageJsonExists?: boolean;
   packageJsonTypeModule?: boolean;
   packageJsonVersion?: boolean;
@@ -39,6 +42,7 @@ export type BuildSystemAnalysis = {
   packageDistJsonExists?: boolean;
   packageDistJsonBin?: boolean;
   packageDistJsonBasicInfo?: boolean;
+  nodeModulesExists?: boolean;
 };
 
 export async function analyze(): Promise<BuildSystemAnalysis> {
@@ -51,10 +55,19 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
   } else {
     buildSystemAnalysis.remoteExists = false;
   }
+  await access('./.gitignore')
+    .then(() => buildSystemAnalysis.ignoreExists = true)
+    .catch(() => buildSystemAnalysis.ignoreExists = false);
+  await access('./LICENSE')
+    .then(() => buildSystemAnalysis.licenseExists = true)
+    .catch(() => buildSystemAnalysis.licenseExists = false);
+  await access('./README.md')
+    .then(() => buildSystemAnalysis.readmeExists = true)
+    .catch(() => buildSystemAnalysis.readmeExists = false);
   // Check if the src folder exists
   await access('./src')
-    .then(() => buildSystemAnalysis.srcFolderExists = true)
-    .catch(() => buildSystemAnalysis.srcFolderExists = false);
+    .then(() => buildSystemAnalysis.srcDirectoryExists = true)
+    .catch(() => buildSystemAnalysis.srcDirectoryExists = false);
   // Check if the project folder exists
   await access('./src/project')
     .then(() => buildSystemAnalysis.projectFolderExists = true)
@@ -182,6 +195,9 @@ export async function analyze(): Promise<BuildSystemAnalysis> {
       buildSystemAnalysis.packageDistJsonBasicInfo = false;
     }
   }
+  await access('./node_modules')
+    .then(() => buildSystemAnalysis.nodeModulesExists = true)
+    .catch(() => buildSystemAnalysis.nodeModulesExists = false);
   return buildSystemAnalysis;
 }
 
