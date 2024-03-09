@@ -10,3 +10,4 @@ export * from './push-branch.transform.js';
 export * from './executable.transform.js';
 export * from './npm-version.transform.js';
 export * from './npm-publish.transform.js';
+export * from './analyze.transform.js'

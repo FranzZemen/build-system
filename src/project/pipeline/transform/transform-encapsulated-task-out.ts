@@ -22,7 +22,7 @@ export class TransformEncapsulatedTaskOut<O> extends TransformPayloadOut<Task<vo
   }
 
   protected override transformContext(pipeIn?: any, payload?: Task<void, O> | undefined): string | object {
-    return payload?.name ?? "Unnamed Encapsulated Task";
+    return payload?.name ?? "Unnamed Encapsulated Task Out";
   }
 
 }

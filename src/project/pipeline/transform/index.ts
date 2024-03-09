@@ -12,4 +12,5 @@ export * from './transform-payload-in.js';
 export * from './transform-payload-out.js';
 export * from './transform-encapsulated-task.js';
 export * from './transform-task-payload.js'
-
+export * from './transform-encapsulated-task-out.js';
+export * from './transform-task-in-out.js';

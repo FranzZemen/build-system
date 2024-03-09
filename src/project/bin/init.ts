@@ -8,5 +8,3 @@ License Type: MIT
 import {initPipeline} from "../lib/pipelines/init.pipeline.js";
 
 const result = await initPipeline.execute();
-console.log(result);
-

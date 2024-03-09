@@ -85,9 +85,8 @@ export class Pipeline<PIPELINE_IN, PIPELINE_OUT = PIPELINE_IN> {
   transform<TRANSFORM_CLASS extends Transform<any, any, any>,
     PASSED_IN = undefined,
     PIPE_IN = PIPELINE_IN,
-    PIPE_OUT = PIPE_IN,
-    CONSTRUCTOR extends TransformConstructor<TRANSFORM_CLASS> = TransformConstructor<TRANSFORM_CLASS>>
-  (constructor: CONSTRUCTOR, payload?: PASSED_IN): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
+    PIPE_OUT = PIPE_IN>
+  (constructor: TransformConstructor<TRANSFORM_CLASS>, payload?: PASSED_IN): Pipeline<PIPELINE_IN, PIPELINE_OUT> {
 
     // ----- Declaration separator ----- //
     this._pipes.push(TransformPipe.transform<TRANSFORM_CLASS, PASSED_IN, PIPE_IN, PIPE_OUT>(constructor, this, payload));
