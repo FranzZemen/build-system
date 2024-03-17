@@ -11,10 +11,3 @@ export const initPipeline: Pipeline<void, boolean> = Pipeline
   .options<void, boolean>({name: 'Project build system initialization', logDepth: 1})
   .transform<AnalyzeTransform, void, void, BuildSystemAnalysis>(AnalyzeTransform)
   .transform <GitInitTransform, void, BuildSystemAnalysis, BuildSystemAnalysis>(GitInitTransform);
-/*
-.startSeries(TransformEncapsulatedTask, checkESMProject)
-.series(TransformEncapsulatedTask, checkESMProject)
-.series(TransformEncapsulatedTask, createBackupDirectory)
-.series(TransformTaskPayload<string>, {task: backupFile, taskArgument: './tsconfig.json'})
-.endSeries(TransformEncapsulatedTask, createRootTsConfig)
-*/

@@ -17,8 +17,13 @@ export class GitInitTransform extends TransformInOut<BuildSystemAnalysis, BuildS
       this.contextLog.warn('Git already initialized, skipping');
     } else {
       const git: SimpleGit = simpleGit();
+
       const result = await git.init();
       this.contextLog.info(result, 'task-internal');
+      rollbackSteps.splice(0, 0, 'rollback git init');
+
+
+
       analysis.gitInitialized = true;
     }
     return analysis;
@@ -27,4 +32,5 @@ export class GitInitTransform extends TransformInOut<BuildSystemAnalysis, BuildS
   protected override transformContext(pipeIn?: BuildSystemAnalysis | undefined, payload?: undefined): string | object {
     return 'Git initialization';
   }
+
 }

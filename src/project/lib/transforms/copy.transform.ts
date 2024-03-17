@@ -13,11 +13,17 @@ import {TransformPayload} from "../../pipeline/index.js";
 
 
 export type CopyPayload = {
+  // Source directory
   src: string,
+  // Destination directory
   dest: string,
+  // Glob pattern to match files
   glob: string | string[],
-  ignoreGlob?: string[],
+  // Glob pattern to ignore files
+  ignore?: string[],
+  // Follow symbolic links
   followSymbolicLinks?: boolean,
+  // Overwrite existing files
   overwrite: true | false
 }
 
@@ -30,7 +36,7 @@ export class CopyTransform extends TransformPayload<CopyPayload> {
     const currentWorkingDirectory = cwd();
 
 
-    await FastGlob(payload.glob, {cwd: join(currentWorkingDirectory, payload.src), followSymbolicLinks: payload.followSymbolicLinks ?? true, ignore: payload.ignoreGlob ?? []})
+    await FastGlob(payload.glob, {cwd: join(currentWorkingDirectory, payload.src), followSymbolicLinks: payload.followSymbolicLinks ?? true, ignore: payload.ignore ?? []})
       .then(files => {
         const copyPromises: Promise<void>[] = [];
         const sourceFileNames: string[] = [];
