@@ -42,7 +42,8 @@
   "scripts": {
     "patch": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/patch.js",
     "minor": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/minor.js",
-    "major": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/major.js"
+    "major": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/major.js",
+    "publish":"npm publish ./out/project"
   },
   "imports": {
     "#project": {

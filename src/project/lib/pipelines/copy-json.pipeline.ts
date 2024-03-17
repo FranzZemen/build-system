@@ -14,6 +14,6 @@ export const copyJsonPipeline = Pipeline
     src: './src',
     dest: './out',
     glob: '**/*.json',
-    ignore: ['tsconfig.json', 'package.json'],
+    ignore: ['**/tsconfig.json', '**/package.json'],
     overwrite: true
   });
