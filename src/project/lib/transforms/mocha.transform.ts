@@ -18,7 +18,7 @@ export class MochaTransform extends TransformIndependent {
   protected override executeImplIndependent(rollbackSteps: string[]): Promise<void> {
     return this.executable.exec({
                                   executable: 'mocha',
-                                  arguments: ['/out/test/**/*.test.js'],
+                                  arguments: ['./out/test/**/*.test.js'],
                                   batchTarget: false,
                                   synchronous: true,
                                   cwd: './'
