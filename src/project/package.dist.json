@@ -39,6 +39,7 @@
     "bs.transpile": "./bin/transpile.js",
     "bs.package": "./bin/package.js",
     "bs.build": "./bin/build.js",
+    "bs.test": "./bin/test.js",
     "bs.commit": "./bin/commit.js",
     "bs.push": "./bin/push.js",
     "bs.patch": "./bin/patch.js",

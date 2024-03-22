@@ -58,6 +58,7 @@ export class CopyTransform extends TransformPayload<CopyPayload> {
                 errors.push(new BuildError(`Error copying file ${sourceFileNames[index]}`, {cause: result.reason}, BuildErrorNumber.CopyFileError))
                 this.contextLog.error(result.reason);
               }
+              backoutSteps.splice(0, 0, 'clean output for copied json');
             });
             if(errors.length) {
               const err = new BuildError('Errors copying files: ', {cause: errors}, BuildErrorNumber.CopyFilesError);
