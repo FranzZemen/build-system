@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
 Created by Franz Zemen 03/22/2024
 License Type: MIT
