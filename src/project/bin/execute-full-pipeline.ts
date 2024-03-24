@@ -14,6 +14,7 @@ import {
 } from "../lib/index.js";
 import {Pipeline} from "../pipeline/index.js";
 import {packagePipeline} from "../lib/pipelines/package.pipeline.js";
+import {testPipeline} from "../lib/pipelines/test.pipeline.js";
 
 
 export async function executeFullPipeline(versionIncrement: NpmVersionIncrement) {
@@ -32,7 +33,7 @@ export async function executeFullPipeline(versionIncrement: NpmVersionIncrement)
   await Pipeline
     .options({name: versionIncrement as string, logDepth: 0})
     // Build
-    .append(buildPipeline)
+    .append(testPipeline)
     // Check in the build
     .transform(CheckInTransform)
     // Commit prior to versioning (npm requirement)

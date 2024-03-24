@@ -8,7 +8,7 @@ License Type: MIT
 
 import {executeFullPipeline} from "./execute-full-pipeline.js";
 
-await executeFullPipeline('major');
+await executeFullPipeline('minor');
 
 
 
