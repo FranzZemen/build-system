@@ -4,12 +4,13 @@ License Type: MIT
 */
 
 import {SyncCheckFunction, ValidationSchema} from "fastest-validator";
-import packageNameRegex from "package-name-regex";
+
 import semverRegex from "semver-regex";
 import {compileSync, validate} from "./validate.js";
 import {Version} from "../util/semver.js";
 import _ from "lodash";
 import {tIsT} from "./t-is-T.js";
+import {packageNameRegex} from 'package-name-regex';
 
 export type ConditionalExportKeys =
   'require'
