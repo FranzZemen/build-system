@@ -9,6 +9,7 @@ import {BuildError, BuildErrorNumber} from "../../util/index.js";
 
 export type WriteObjectFileNamePayload = {
   targetPath: string;
+  input?: any;
 }
 
 export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFileNamePayload, any> {
@@ -18,6 +19,9 @@ export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFi
 
   protected executeImplPayloadIn(backoutSteps: string[], input: any, payload: WriteObjectFileNamePayload): Promise<void> {
     backoutSteps.splice(0, 0, `Undo write to ${payload.targetPath}`)
+    if(payload.input) {
+      input = payload.input; // Overrides transform input
+    }
     return writeFile(payload.targetPath, JSON.stringify(input, null, 2))
       .catch(err => {
         this.contextLog.error(err);
