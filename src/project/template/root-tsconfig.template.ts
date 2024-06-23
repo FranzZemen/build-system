@@ -9,6 +9,9 @@ export const rootTsconfigTemplate = {
   "references": [
     {
       "path": "./src/project/tsconfig.json"
+    },
+    {
+      "path": "./src/test/tsconfig.json"
     }
   ]
 };

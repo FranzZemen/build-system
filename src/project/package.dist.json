@@ -45,6 +45,7 @@
     "bs.patch": "./bin/patch.js",
     "bs.minor": "./bin/minor.js",
     "bs.major": "./bin/major.js",
-    "bs.publish": "./bin/publish.js"
+    "bs.publish": "./bin/publish.js",
+    "bs.scaffold": "./bin/scaffold.js"
   }
 }
