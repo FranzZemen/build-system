@@ -13,4 +13,4 @@ export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0}
 scaffoldPipeline
   .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform,{path:'./src/project'})
   .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform,{path:'./src/test'})
-  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigBase});
+  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.base.json', input: tsConfigBase});
