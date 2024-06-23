@@ -3,7 +3,7 @@ Created by Franz Zemen 06/23/2024
 License Type: MIT
 */
 
-import {Pipeline} from "../../pipeline/index.js";
+import {Pipeline} from '../../pipeline/index.js';
 import {CreateDirectoryPayload, CreateDirectoryTransform} from '../transforms/create-directory.transform.js';
 import {WriteObjectFileNamePayload, WriteObjectToJsonTransform} from '../transforms/write-object-to-json.transform.js';
 import {tsConfigBase} from '../../template/tsconfig.base.js';
@@ -11,6 +11,7 @@ import {tsconfigRoot} from '../../template/tsconfig.root.js';
 import {tsConfigProject} from '../../template/tsconfig.project.js';
 import {tsConfigTest} from '../../template/tsconfig.test.js';
 import {MaleatePackagePayload, MaleatePackageTransform} from '../transforms/maleate-package.transform.js';
+import {ModuleType} from '../../validate/index.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
@@ -25,6 +26,7 @@ scaffoldPipeline
     targetPath: './package.json',
     exclusions: ['main'],
     inclusions: {
+      type: ModuleType.module,
       exports: {
         '.': {
           import: './src/project/index.ts'
