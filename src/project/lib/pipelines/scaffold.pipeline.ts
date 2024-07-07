@@ -12,6 +12,7 @@ import {tsConfigProject} from '../../template/tsconfig.project.js';
 import {tsConfigTest} from '../../template/tsconfig.test.js';
 import {MaleatePackagePayload, MaleatePackageTransform} from '../transforms/maleate-package.transform.js';
 import {ModuleType} from '../../validate/index.js';
+import {CopyPayload, CopyTransform} from '../transforms/copy.transform.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
@@ -33,4 +34,10 @@ scaffoldPipeline
         }
       },
     }
+  })
+  .transform<CopyTransform, CopyPayload>(CopyTransform, {
+    src: './src/project/template',
+    dest: './',
+    glob: ['.gitignore'],
+    overwrite: false
   });
