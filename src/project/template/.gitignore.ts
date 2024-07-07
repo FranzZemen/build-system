@@ -8,4 +8,6 @@ export const gitignore = `
 node_modules
 out
 /project-init-undo.txt
+config.json
+config.json.decrypt
 `;
