@@ -14,8 +14,8 @@ export enum BuildErrorNumber {
   RmError                = 'Error 54: rm error',
   RmGlob                 = 'Error 55: rm glob error',
   FileAlreadyExists      = 'Error 56: File already exists',
-  WriteOjbectToJsonError = 'Error 57: Error writing jhson file',
-
+  WriteObjectToJsonError = 'Error 57: Error writing jhson file',
+  WriteStringToFile      = 'Error 58: Error writing string to file',
 
   // Child Process Errors
   NoExecutablePayload    = 'Error 500: No payload provided for ExecutableTransform',
@@ -29,6 +29,7 @@ export enum BuildErrorNumber {
   VersionIsNotSemver     = 'Error 5000: Version string does not represent a semver',
   // Transform errors
   MissingPayload         = 'Error 6000: Missing payload',
+
 
 }
 

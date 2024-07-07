@@ -8,5 +8,5 @@
     "declarationDir": "../../out/project/types",
     "outDir": "../../out/project"
   },
-  "include": ["**/*"]
+  "include": ["**/*","**/.*"]
 }

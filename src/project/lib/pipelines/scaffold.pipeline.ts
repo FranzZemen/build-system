@@ -12,17 +12,18 @@ import {tsConfigProject} from '../../template/tsconfig.project.js';
 import {tsConfigTest} from '../../template/tsconfig.test.js';
 import {MaleatePackagePayload, MaleatePackageTransform} from '../transforms/maleate-package.transform.js';
 import {ModuleType} from '../../validate/index.js';
-import {CopyPayload, CopyTransform} from '../transforms/copy.transform.js';
+import {WriteFilePayload, WriteFileTransform} from '../transforms/write-file.transform.js';
+import {gitignore} from '../../template/.gitignore.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
 scaffoldPipeline
-  .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform,{path:'./src/project'})
-  .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform,{path:'./src/test'})
+  .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform, {path: './src/project'})
+  .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform, {path: './src/test'})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.base.json', input: tsConfigBase})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.json', input: tsconfigRoot})
-  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform,{targetPath: './src/project/tsconfig.json', input: tsConfigProject})
-  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform,{targetPath: './src/test/tsconfig.json', input: tsConfigTest})
+  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigProject})
+  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/test/tsconfig.json', input: tsConfigTest})
   .transform<MaleatePackageTransform, MaleatePackagePayload>(MaleatePackageTransform, {
     targetPath: './package.json',
     exclusions: ['main'],
@@ -35,9 +36,4 @@ scaffoldPipeline
       },
     }
   })
-  .transform<CopyTransform, CopyPayload>(CopyTransform, {
-    src: './src/project/template',
-    dest: './',
-    glob: ['.gitignore'],
-    overwrite: false
-  });
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore});

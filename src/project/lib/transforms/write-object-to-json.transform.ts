@@ -25,11 +25,15 @@ export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFi
     return writeFile(payload.targetPath, JSON.stringify(input, null, 2))
       .catch(err => {
         this.contextLog.error(err);
-        throw new BuildError('Error writing file', err, BuildErrorNumber.WriteOjbectToJsonError);
+        throw new BuildError('Error writing file', err, BuildErrorNumber.WriteObjectToJsonError);
       });
   }
 
   protected transformContext(pipeIn: any, passedIn: WriteObjectFileNamePayload | undefined): string {
-    return `writing ${passedIn?.targetPath}`;
+    if(passedIn) {
+      return `writing ${passedIn?.targetPath}`;
+    } else {
+      return `writing ${pipeIn.targetPath}`;
+    }
   }
 }
