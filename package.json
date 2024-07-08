@@ -33,7 +33,7 @@
     "del": "^7.1.0",
     "fast-glob": "^3.3.2",
     "fastest-validator": "^1.18.0",
-    "inquirer": "^9.3.4",
+    "inquirer": "<=9.3.4",
     "lodash": "^4.17.21",
     "package-name-regex": "^4.0.0",
     "semver-regex": "^4.0.5",
