@@ -51,17 +51,17 @@ Scaffolding legend:
                     ├─ src ─┬─ project  ─┐                          (Ref: Project Directory)
                     │       │            ├─ tsconfig.json           (*)     (Ref: Project TSConfig)
                     │       │            ├─ package.dist.json       (?) (*) (Ref: Distribution Package)                   
-                    │       │            ├─ index.ts                (?)
+                    │       │            ├─ npmu.ts                (?)
                     │       │            └─ [source directories]    (+)
                     │       │           
                     │       ├─ test ─┐                              (Ref: Test Directory)
                     │       │        ├─ tsconfig.json               (*) (Ref: Test TSConfig)
-                    │       │        ├─ index.ts                    (?)
+                    │       │        ├─ npmu.ts                    (?)
                     │       │        └─ [source directories]        (+)
                     │       │            
                     │       └─ [other] (+) ─┐                       (Ref: Other subprojects)
                     │                       ├─ tsconfig.json        (*) 
-                    │                       ├─ index.ts             (?)
+                    │                       ├─ npmu.ts             (?)
                     │                       └─ [source directories  (+)
                     │
                     └─ out (G) ─┐                                   (Ref: Output Directory)
