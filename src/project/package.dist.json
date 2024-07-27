@@ -18,17 +18,18 @@
   },
   "homepage": "https://github.com/FranzZemen/build-system#readme",
   "dependencies": {
+    "@inquirer/prompts": "^5.3.2",
     "del": "^7.1.0",
-    "fastest-validator": "^1.17.0",
-    "inquirer": "^9.2.15",
+    "fast-glob": "^3.3.2",
+    "fastest-validator": "^1.18.0",
     "lodash": "^4.17.21",
-    "package-name-regex": "^3.1.1",
+    "package-name-regex": "^4.0.0",
     "semver-regex": "^4.0.5",
-    "simple-git": "^3.22.0",
-    "spdx-license-ids": "^3.0.17",
+    "simple-git": "^3.25.0",
+    "spdx-license-ids": "^3.0.18",
     "tsconfig.d.ts": "^0.1.20",
-    "tslib": "^2.6.2",
-    "uuid": "^9.0.1"
+    "tslib": "^2.6.3",
+    "uuid": "^10.0.0"
   },
   "type": "module",
   "bin": {
