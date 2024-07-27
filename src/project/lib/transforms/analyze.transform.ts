@@ -6,7 +6,7 @@ License Type: MIT
 import {TransformOut} from "../../pipeline/index.js";
 import {analyze, BuildSystemAnalysis} from "../../util/index.js";
 import {cwd} from "node:process";
-import inquirer from "inquirer";
+import {confirm} from '@inquirer/prompts';
 
 export class AnalyzeTransform extends TransformOut<BuildSystemAnalysis> {
   constructor(depth: number) {
@@ -75,23 +75,16 @@ export class AnalyzeTransform extends TransformOut<BuildSystemAnalysis> {
     this.contextLog.info();
 
     if(proceed) {
-      return inquirer.prompt([
-                               {
-                                 name: 'proceed',
-                                 message: 'Minimum requirements met to initialize a new project.  Proceed?',
-                                 type: 'confirm',
-                                 default: false
-                               }
-                             ])
-        .then(answers => {
-          proceed = answers['proceed'];
-          if (!proceed) {
+      return confirm({message: 'Minimum requirements met to initialize a new project.  Proceed?'})
+        .then(confirmed => {
+          if(confirmed) {
+            return analysis;
+          } else {
             throw new Error('Initialization will not proceed at user\'s request');
           }
-          return analysis;
         });
     } else {
-      throw new Error('Initialization will not proceed due to requirements');
+      throw new Error('Initialization will not proceed');
     }
   }
 

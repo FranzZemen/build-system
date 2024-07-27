@@ -3,8 +3,7 @@ Created by Franz Zemen 02/19/2024
 License Type: MIT
 */
 
-import inquirer from "inquirer";
-import {buildPipeline} from "../lib/pipelines/build.pipeline.js";
+
 import {
   CheckInTransform,
   CommitTransform, NpmPublishTransform,
@@ -15,9 +14,12 @@ import {
 import {Pipeline} from "../pipeline/index.js";
 import {packagePipeline} from "../lib/pipelines/package.pipeline.js";
 import {testPipeline} from "../lib/pipelines/test.pipeline.js";
+import {input} from '@inquirer/prompts';
 
 
 export async function executeFullPipeline(versionIncrement: NpmVersionIncrement) {
+  const comment = await input({message: 'Commit comment'});
+  /*
   const comment = await inquirer
     .prompt([
               {
@@ -30,6 +32,8 @@ export async function executeFullPipeline(versionIncrement: NpmVersionIncrement)
     .then(answers => {
       return answers['comment'];
     });
+
+   */
   await Pipeline
     .options({name: versionIncrement as string, logDepth: 0})
     // Build

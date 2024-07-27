@@ -6,7 +6,7 @@ License Type: MIT
 import {git} from '../../util/git.js';
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
 import {TransformPayload} from "../../pipeline/index.js";
-import inquirer from "inquirer";
+import {input} from '@inquirer/prompts';
 
 
 export type CommitPayload = {
@@ -24,18 +24,7 @@ export class CommitTransform extends TransformPayload<CommitPayload> {
   protected async executeImplPayload(rollbackSteps: string[], payload: CommitPayload): Promise<void> {
     let comment = payload?.comment ?? undefined;
     if (!comment) {
-      comment = await inquirer
-        .prompt([
-                  {
-                    name: 'comment',
-                    message: 'Commit comment',
-                    type: 'input',
-                    default: ''
-                  }
-                ])
-        .then(answers => {
-          return answers['comment'];
-        });
+      comment = await input({message: 'Commit comment'});
     }
     if (comment) {
       return git().commit(comment).then(result => {

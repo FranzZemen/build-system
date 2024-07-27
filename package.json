@@ -20,20 +20,19 @@
   "homepage": "https://github.com/FranzZemen/build-system#readme",
   "devDependencies": {
     "@types/chai": "^4.3.16",
-    "@types/inquirer": "^9.0.7",
-    "@types/lodash": "^4.17.6",
+    "@types/lodash": "^4.17.7",
     "@types/mocha": "^10.0.7",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.14.12",
     "@types/uuid": "^10.0.0",
     "chai": "^5.1.1",
-    "mocha": "^10.6.0"
+    "mocha": "^10.7.0"
   },
   "dependencies": {
     "@franzzemen/build-system": "file:out/dist",
+    "@inquirer/prompts": "^5.3.2",
     "del": "^7.1.0",
     "fast-glob": "^3.3.2",
     "fastest-validator": "^1.18.0",
-    "inquirer": "<=9.3.4",
     "lodash": "^4.17.21",
     "package-name-regex": "^4.0.0",
     "semver-regex": "^4.0.5",

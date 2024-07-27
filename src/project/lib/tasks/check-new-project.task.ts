@@ -7,7 +7,7 @@ import {cwd} from "node:process";
 import {Task} from "../../pipeline/index.js";
 import {Log} from "../../log/index.js";
 import {analyze, BuildSystemAnalysis} from "../../util/index.js";
-import inquirer from 'inquirer'
+import {confirm} from '@inquirer/prompts';
 
 export const checkNewProject: Task<void, boolean> = async (log: Log, rollbackSteps: string[]): Promise<boolean> => {
   log.warn(`***** Current directory is ${cwd()}`);
@@ -71,16 +71,8 @@ export const checkNewProject: Task<void, boolean> = async (log: Log, rollbackSte
   log.info();
 
   if(proceed) {
-    return inquirer.prompt([
-                             {
-                               name: 'proceed',
-                               message: 'Minimum requirements met to initialize a new project.  Proceed?',
-                               type: 'confirm',
-                               default: false
-                             }
-                           ])
-      .then(answers => {
-        proceed = answers['proceed'];
+    return confirm({message: 'Minimum requirements met to initialize a new project.  Proceed?'})
+      .then(proceed => {
         if (!proceed) {
           log.warn('Not proceeding with new project initialization.');
         }

@@ -4,10 +4,12 @@ License Type: MIT
 */
 
 import {NpmVersionIncrement, Pipeline, BuildNpmVersionTransform, CheckInTransform, CommitTransform, PushBranchTransform} from "#project";
-import inquirer from "inquirer";
+import {input} from '@inquirer/prompts';
 
 
 export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement) {
+  const comment = await input({message: 'Commit comment'});
+  /*
   const comment = await inquirer
     .prompt([
               {
@@ -20,6 +22,8 @@ export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement
     .then(answers => {
       return answers['comment'];
     });
+
+   */
   await Pipeline
     .options({name: versionIncrement as string, logDepth: 0})
     .transform(CheckInTransform)
