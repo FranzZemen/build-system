@@ -17,23 +17,11 @@ import {testPipeline} from "../lib/pipelines/test.pipeline.js";
 import {input} from '@inquirer/prompts';
 
 
-export async function executeFullPipeline(versionIncrement: NpmVersionIncrement) {
-  const comment = await input({message: 'Commit comment'});
-  /*
-  const comment = await inquirer
-    .prompt([
-              {
-                name: 'comment',
-                message: 'Commit comment',
-                type: 'input',
-                default: ''
-              }
-            ])
-    .then(answers => {
-      return answers['comment'];
-    });
+export async function executeFullPipeline(versionIncrement: NpmVersionIncrement, comment?: string) {
+  if(!comment) {
+    comment = await input({message: 'Commit comment'});
+  }
 
-   */
   await Pipeline
     .options({name: versionIncrement as string, logDepth: 0})
     // Build

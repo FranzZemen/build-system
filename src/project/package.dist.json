@@ -47,6 +47,7 @@
     "bs.minor": "./bin/minor.js",
     "bs.major": "./bin/major.js",
     "bs.publish": "./bin/publish.js",
-    "bs.scaffold": "./bin/scaffold.js"
+    "bs.scaffold": "./bin/scaffold.js",
+    "bs.ncu": "./bin/ncu.js"
   }
 }
