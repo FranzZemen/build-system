@@ -31,7 +31,7 @@ scaffoldPipeline
       type: ModuleType.module,
       exports: {
         '.': {
-          import: './src/project/npmu.ts'
+          import: './src/project/import.ts'
         }
       },
     }
