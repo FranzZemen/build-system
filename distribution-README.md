@@ -1,11 +1,61 @@
 # Build System Runtime Documentation
 
-## Introduction
+This documentation if for usage of the build-system.  For documentation on the build-system itself, see the README.
+md file.
 
-The package should have been installed per package documentation:
+## Rationale
+
+Why another build system?  I have used many build systems, and found them all lacking in some way, mostly being too 
+complex. I desired something simple to build his projects, and that could be easily extended. I also wanted a build 
+system that is really close to the underlying language and tools, so that it would be easy to modify, extend, and 
+replace components as needed.
+
+Should you use it?  Maybe some day when it is fully documented, and has additional features.  Today, it does a bare 
+minimum.  
+
+## Installation
 
 ```console
-    npm i @franzzemen/build
+    npm i @franzzemen/build-system
+```
+## Usage
+
+### Scaffolding
+
+After installing, create the project scaffold with:
+
+```console
+    npx bs.scaffold
+```    
+  
+### Clean output
+
+```console
+    npx bs.clean
+```    
+
+### Clean & Build
+
+```console
+    npx bs.build
+```    
+
+### Clean & Build & Test
+
+Currently, expects mocha to be the test bed
+
+```console
+    npx bs.test
+```    
+
+### Clean, Build, Test, Push to Github
+
+
+
+```console
+    npx bs.patch
+    npx bs.minor
+    npx bs.major
 ```
 
 The installation provides the following npx commands:
