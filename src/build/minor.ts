@@ -6,7 +6,7 @@ License Type: MIT
 
 import {executeFulllPipeline} from "./execute-fulll-pipeline.js";
 
-await executeFulllPipeline('major');
+await executeFulllPipeline('minor');
 
 
 
