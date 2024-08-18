@@ -10,3 +10,6 @@ import {MochaTransform} from "../transforms/mocha.transform.js";
 export const testPipeline = Pipeline.options({name: 'test', logDepth: 0});
 testPipeline.append(buildPipeline)
   .transform(MochaTransform);
+
+export const testOnlyPipeline: Pipeline<void, void> = Pipeline.options({name: 'test-only', logDepth: 0})
+  .transform(MochaTransform);

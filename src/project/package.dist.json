@@ -41,6 +41,7 @@
     "bs.package": "./bin/package.js",
     "bs.build": "./bin/build.js",
     "bs.test": "./bin/test.js",
+    "bs.test-only": "./bin/test-only.js",
     "bs.commit": "./bin/commit.js",
     "bs.push": "./bin/push.js",
     "bs.patch": "./bin/patch.js",
