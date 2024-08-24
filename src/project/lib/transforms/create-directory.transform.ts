@@ -3,8 +3,8 @@ Created by Franz Zemen 06/23/2024
 License Type: MIT
 */
 
-import {TransformPayload} from '../../pipeline/index.js';
 import {mkdir} from 'fs/promises';
+import {TransformPayload} from '@franzzemen/pipeline';
 
 const subdirectoryPathRegex = /^\.\/.*$/
 
@@ -31,7 +31,7 @@ export class CreateDirectoryTransform extends TransformPayload<CreateDirectoryPa
         throw new Error('Path must be a subdirectory path starting with ./');
       }
     } catch (error) {
-      this.contextLog.error(error as Error);
+      this.contextReporter.error(error as Error);
     }
   }
 

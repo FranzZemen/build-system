@@ -4,7 +4,7 @@ License Type: MIT
 */
 
 import {Executable, ExecutablePayload, ExecutableResult} from '../../util/executable.js';
-import {TransformPayloadOut} from "../../pipeline/index.js";
+import {TransformPayloadOut} from '@franzzemen/pipeline';
 
 
 /**
@@ -14,7 +14,7 @@ export abstract class AbstractExecutableTransform<OUT = void> extends TransformP
   protected executable: Executable<ExecutablePayload>
   protected constructor(depth: number) {
     super(depth);
-    this.executable = new Executable<ExecutablePayload>(this.contextLog);
+    this.executable = new Executable<ExecutablePayload>(this.contextReporter);
   }
   protected executeImplPayloadOut(backoutSteps: string[], payload: ExecutablePayload): Promise<OUT> {
     return this.executable.exec(payload)

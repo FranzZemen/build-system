@@ -6,7 +6,7 @@ License Type:
 import {readFile, writeFile} from 'fs/promises';
 import * as path from 'path';
 import {Package, TargetOptions} from "../../validate/index.js";
-import {TransformPayload} from "../../pipeline/index.js";
+import {TransformPayload} from '@franzzemen/pipeline';
 
 
 export type MaleatePackagePayload = {

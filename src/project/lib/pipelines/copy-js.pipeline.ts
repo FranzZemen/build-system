@@ -4,8 +4,8 @@ License Type: MIT
 */
 
 
-import {Pipeline} from "../../pipeline/index.js";
 import {CopyPayload, CopyTransform} from "../transforms/copy.transform.js";
+import {Pipeline} from '@franzzemen/pipeline';
 
 export const copyJsPipeline = Pipeline
   .options({name: 'copyJS', logDepth: 0})

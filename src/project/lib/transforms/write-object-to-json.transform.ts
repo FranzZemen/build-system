@@ -3,9 +3,9 @@ Created by Franz Zemen 02/23/2024
 License Type: MIT
 */
 
-import {TransformPayloadIn} from "../../pipeline/index.js";
 import {writeFile} from "fs/promises";
 import {BuildError, BuildErrorNumber} from "../../util/index.js";
+import {TransformPayloadIn} from '@franzzemen/pipeline';
 
 export type WriteObjectFileNamePayload = {
   targetPath: string;
@@ -24,7 +24,7 @@ export class WriteObjectToJsonTransform extends TransformPayloadIn<WriteObjectFi
     }
     return writeFile(payload.targetPath, JSON.stringify(input, null, 2))
       .catch(err => {
-        this.contextLog.error(err);
+        this.contextReporter.error(err);
         throw new BuildError('Error writing file', err, BuildErrorNumber.WriteObjectToJsonError);
       });
   }

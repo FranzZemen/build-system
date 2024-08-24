@@ -3,7 +3,6 @@ Created by Franz Zemen 06/23/2024
 License Type: MIT
 */
 
-import {Pipeline} from '../../pipeline/index.js';
 import {CreateDirectoryPayload, CreateDirectoryTransform} from '../transforms/create-directory.transform.js';
 import {WriteObjectFileNamePayload, WriteObjectToJsonTransform} from '../transforms/write-object-to-json.transform.js';
 import {tsConfigBase} from '../../template/tsconfig.base.js';
@@ -14,6 +13,7 @@ import {MaleatePackagePayload, MaleatePackageTransform} from '../transforms/male
 import {ModuleType} from '../../validate/index.js';
 import {WriteFilePayload, WriteFileTransform} from '../transforms/write-file.transform.js';
 import {gitignore} from '../../template/.gitignore.js';
+import {Pipeline} from '@franzzemen/pipeline';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});

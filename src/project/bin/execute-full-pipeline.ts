@@ -11,10 +11,10 @@ import {
   NpmVersionTransform,
   PushBranchTransform
 } from "../lib/index.js";
-import {Pipeline} from "../pipeline/index.js";
 import {packagePipeline} from "../lib/pipelines/package.pipeline.js";
 import {testPipeline} from "../lib/pipelines/test.pipeline.js";
 import {input} from '@inquirer/prompts';
+import {Pipeline} from '@franzzemen/pipeline';
 
 
 export async function executeFullPipeline(versionIncrement: NpmVersionIncrement, comment?: string) {

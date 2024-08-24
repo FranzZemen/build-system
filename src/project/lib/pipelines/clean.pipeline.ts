@@ -3,8 +3,8 @@ Created by Franz Zemen 02/22/2024
 License Type: 
 */
 
-import {Pipeline} from "../../pipeline/index.js";
 import {CleanTransform} from "../transforms/clean.transform.js";
+import {Pipeline} from '@franzzemen/pipeline';
 
 
 

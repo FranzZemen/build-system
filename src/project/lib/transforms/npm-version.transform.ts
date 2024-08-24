@@ -3,12 +3,11 @@ Created by Franz Zemen 04/30/2023
 License Type: MIT
 */
 
-import {BuildError, BuildErrorNumber, Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
+import {Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
 
-import {Package, packageIsBasePackage} from "../../validate/index.js";
-import {writeFile} from "fs/promises";
-import {NpmVersionIncrement} from "./build-npm-version.transform.js";
-import {TransformPayloadOut} from "../../pipeline/index.js";
+import {Package, packageIsBasePackage} from '../../validate/index.js';
+import {NpmVersionIncrement} from './build-npm-version.transform.js';
+import {TransformPayloadOut} from '@franzzemen/pipeline';
 
 /**
  * Updates the npm version to the root package as well as the project package, then publishes the project package
@@ -19,7 +18,7 @@ export class NpmVersionTransform extends TransformPayloadOut<NpmVersionIncrement
 
   constructor(depth: number) {
     super(depth);
-    this.executable = new Executable<ExecutablePayload>(this.contextLog);
+    this.executable = new Executable<ExecutablePayload>(this.contextReporter);
   }
 
   protected transformContext(pipeIn: undefined,

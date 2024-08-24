@@ -3,8 +3,9 @@ Created by Franz Zemen 02/19/2024
 License Type: MIT
 */
 
-import {NpmVersionIncrement, Pipeline, BuildNpmVersionTransform, CheckInTransform, CommitTransform, PushBranchTransform} from "#project";
+import {NpmVersionIncrement, BuildNpmVersionTransform, CheckInTransform, CommitTransform, PushBranchTransform} from "#project";
 import {input} from '@inquirer/prompts';
+import {Pipeline} from '@franzzemen/pipeline';
 
 
 export async function executeFulllPipeline(versionIncrement: NpmVersionIncrement) {

@@ -7,13 +7,14 @@ License Type: MIT
 
 import {inspect} from "node:util";
 import {analyze} from "../util/index.js";
-import {Log} from "../log/index.js";
+import {Reporter} from '@franzzemen/pipeline';
 
-const log = new Log(0);
+
+const reporter = new Reporter(0);
 await analyze()
   .then((analysis) =>{
-    log.info(inspect(analysis, false, 10, true));
+    reporter.info(inspect(analysis, false, 10, true));
   })
   .catch((error) => {
-    log.error(error);
+    reporter.error(error);
   });

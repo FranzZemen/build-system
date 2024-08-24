@@ -5,9 +5,9 @@ License Type: MIT
 
 import {ChildProcess, exec, execFile, execFileSync, execSync} from 'node:child_process';
 import process from 'node:process';
-import {Log, LogTreatmentName} from '../log/index.js';
 import {BuildError, BuildErrorNumber} from './build-error.js';
 import {isExecSyncErrorThenStringifyBuffers} from './exec-sync-error.js';
+import {Reporter, ReporterTreatmentName} from '@franzzemen/pipeline';
 
 export type ArgumentDashFlag = `-${string}`;
 export type ArgumentDoubleDashFlag = `--${string}`;
@@ -40,18 +40,18 @@ export type ExecutablePayload = {
   // If true, the executable is a batch file
   batchTarget: boolean;
   synchronous: boolean;
-  stdioTreatment?: LogTreatmentName;
-  stderrTreatment?: LogTreatmentName;
+  stdioTreatment?: ReporterTreatmentName;
+  stderrTreatment?: ReporterTreatmentName;
 }
 
 export type ExecutableResult = [stdout: string, stderr:string | undefined];
 
 export class Executable<PAYLOAD extends ExecutablePayload> {
-  protected log: Log;
+  protected log: Reporter;
 
-  public constructor(log?: Log) {
+  public constructor(log?: Reporter) {
     if (!log) {
-      this.log = new Log(0);
+      this.log = new Reporter(0);
     } else {
       this.log = log;
     }
@@ -120,8 +120,8 @@ export class Executable<PAYLOAD extends ExecutablePayload> {
   private processAsyncError(error: Error | null,
                             stdout: string,
                             stderr: string,
-                            stdioTreatment: LogTreatmentName = 'context',
-                            stderrTreatment: LogTreatmentName = 'context'): void | BuildError {
+                            stdioTreatment: ReporterTreatmentName = 'context',
+                            stderrTreatment: ReporterTreatmentName = 'context'): void | BuildError {
     if (stdout) {
       this.log.infoSegments([{data: stdout, treatment: stdioTreatment}]);
     }

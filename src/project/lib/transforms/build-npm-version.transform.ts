@@ -4,9 +4,9 @@ License Type: MIT
 */
 
 import {BuildError, BuildErrorNumber, Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
-import {TransformPayloadOut} from "../../pipeline/index.js";
 import {Package, packageIsBasePackage} from "../../validate/index.js";
 import {writeFile} from "fs/promises";
+import {TransformPayloadOut} from '@franzzemen/pipeline';
 
 export type NpmVersionIncrement = 'patch' | 'minor' | 'major';
 
@@ -19,7 +19,7 @@ export class BuildNpmVersionTransform extends TransformPayloadOut<NpmVersionIncr
 
   constructor(depth: number) {
     super(depth);
-    this.executable = new Executable<ExecutablePayload>(this.contextLog);
+    this.executable = new Executable<ExecutablePayload>(this.contextReporter);
   }
 
   protected transformContext(pipeIn: undefined,
@@ -47,7 +47,7 @@ export class BuildNpmVersionTransform extends TransformPayloadOut<NpmVersionIncr
                       distPackage.version = mainPackage.version;
                     } else {
                       const errMsg = 'main package version is undefined';
-                      this.contextLog.error(errMsg);
+                      this.contextReporter.error(errMsg);
                       throw new BuildError(errMsg, undefined, BuildErrorNumber.PackageNotVersioned);
                     }
                     return writeFile('./src/project/package.dist.json', JSON.stringify(distPackage, null, 2), 'utf8')

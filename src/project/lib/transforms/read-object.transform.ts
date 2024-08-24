@@ -4,8 +4,8 @@ License Type:
 */
 
 import {BuildError, BuildErrorNumber, readFileAsJson} from '../../util/index.js';
-import {TransformIndependent, TransformPayloadOut} from "../../pipeline/index.js";
 import {tIsT} from "../../validate/index.js";
+import {TransformPayloadOut} from '@franzzemen/pipeline';
 
 export type ReadObjectFileNamePayload<T> = {
   targetPath: string;

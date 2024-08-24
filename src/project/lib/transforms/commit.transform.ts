@@ -5,8 +5,8 @@ License Type: MIT
 
 import {git} from '../../util/git.js';
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
-import {TransformPayload} from "../../pipeline/index.js";
 import {input} from '@inquirer/prompts';
+import {TransformPayload} from '@franzzemen/pipeline';
 
 
 export type CommitPayload = {
@@ -28,7 +28,7 @@ export class CommitTransform extends TransformPayload<CommitPayload> {
     }
     if (comment) {
       return git().commit(comment).then(result => {
-        this.contextLog.info(result)
+        this.contextReporter.info(result)
         rollbackSteps.splice(0,0,'Undo git commit as necessary (git revert?)');
       });
     } else {

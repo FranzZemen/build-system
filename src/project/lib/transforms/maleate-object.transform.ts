@@ -3,11 +3,8 @@ Created by Franz Zemen 02/13/2023
 License Type: 
 */
 
-import {readFile, writeFile} from 'fs/promises';
-import * as path from 'path';
-import {Package, TargetOptions} from "../../validate/index.js";
-import {Transform, TransformPayload} from "../../pipeline/index.js";
-import {BuildError, BuildErrorNumber} from "../../util/index.js";
+import {BuildError, BuildErrorNumber} from '../../util/index.js';
+import {Transform} from '@franzzemen/pipeline';
 
 
 export type MaleatePackagePayload = {
@@ -25,10 +22,10 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
   }
 
   protected override async executeImpl(rollbackSteps: string[], pipeIn: T,
-                                 payload?: MaleatePackagePayload | undefined): Promise<T> {
+                                       payload?: MaleatePackagePayload | undefined): Promise<T> {
     if (!payload) {
-      const err:BuildError = new BuildError('Unreachable code: no payload', undefined, BuildErrorNumber.MissingPayload);
-      this.contextLog.error(err)
+      const err: BuildError = new BuildError('Unreachable code: no payload', undefined, BuildErrorNumber.MissingPayload);
+      this.contextReporter.error(err)
       throw err;
     }
     if (payload?.exclusions) {

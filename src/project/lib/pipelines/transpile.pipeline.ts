@@ -3,9 +3,9 @@ Created by Franz Zemen 02/22/2024
 License Type: MIT
 */
 
-import {Pipeline} from "../../pipeline/index.js";
 import {ExecutableTransform} from "../transforms/index.js";
 import {ExecutablePayload} from "../../util/index.js";
+import {Pipeline} from '@franzzemen/pipeline';
 
 export const transpilePayload: ExecutablePayload = {
   executable: 'tsc',

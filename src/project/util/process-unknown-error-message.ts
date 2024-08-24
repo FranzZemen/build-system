@@ -3,11 +3,11 @@ Created by Franz Zemen 12/24/2022
 License Type: MIT
 */
 
-import {LogInterface} from '../log/log-interface.js';
 import {BuildError} from './build-error.js';
+import {ReporterInterface} from '@franzzemen/pipeline';
 
 
-export function processUnknownError(err: unknown | Error | BuildError | {status: string, value: any | undefined, reason: any | undefined}[], log: LogInterface, message?: string): Error {
+export function processUnknownError(err: unknown | Error | BuildError | {status: string, value: any | undefined, reason: any | undefined}[], log: ReporterInterface, message?: string): Error {
   if(err instanceof BuildError) {
     // Already processed
     return err;

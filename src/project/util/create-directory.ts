@@ -6,9 +6,10 @@ License Type: MIT
 import {access} from "fs/promises";
 import {mkdir} from "node:fs/promises";
 import {BuildError, BuildErrorNumber} from "./build-error.js";
-import {Log} from "../log/index.js";
+import {Reporter} from '@franzzemen/pipeline';
 
-export async function createDirectory(log: Log, directory: string, errorOnExists = true): Promise<boolean> {
+
+export async function createDirectory(log: Reporter, directory: string, errorOnExists = true): Promise<boolean> {
   return access(directory)
     .then(() => {
       // Directory exists

@@ -5,13 +5,13 @@ License Type: MIT
 */
 
 
-import {Log} from "../../log/index.js";
 import {createDirectory} from "../../util/create-directory.js";
+import {Reporter} from '@franzzemen/pipeline';
 
 export const backupDirectory = './bs.backup';
 
-export function createBackupDirectory(log:Log, rollbackSteps: string[]): Promise<void> {
-  return createDirectory(log, backupDirectory, true)
+export function createBackupDirectory(reporter:Reporter, rollbackSteps: string[]): Promise<void> {
+  return createDirectory(reporter, backupDirectory, true)
     .then((created) => {
       if(created) {
         rollbackSteps.splice(0, 0, `delete ${backupDirectory}`);

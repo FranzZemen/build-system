@@ -4,14 +4,13 @@ License Type:
 */
 
 
-import {Task} from "../../pipeline/task/task.js";
-import {BuildError, readFileAsJson} from "../../util/index.js";
-import {Package, packageIsEsmPackage} from "../../validate/package.js";
-import {Log} from "../../log/index.js";
-import {cwd} from "node:process";
+import {readFileAsJson} from '../../util/index.js';
+import {Package, packageIsEsmPackage} from '../../validate/package.js';
+import {Reporter, Task} from '@franzzemen/pipeline';
 
 export type CheckEsmProjectTask = Task<void, void>;
 
-export async function checkESMProject(log: Log, rollbackSteps: string[]): Promise<void> {
-  return readFileAsJson<Package>('./package.json', packageIsEsmPackage).then(packageJSON => {});
+export async function checkESMProject(reporter: Reporter, rollbackSteps: string[]): Promise<void> {
+  return readFileAsJson<Package>('./package.json', packageIsEsmPackage).then(packageJSON => {
+  });
 }

@@ -3,12 +3,12 @@ Created by Franz Zemen 02/18/2024
 License Type: MIT
 */
 
-import {access, writeFile} from "fs/promises";
-import {BuildError, BuildErrorNumber} from "./index.js";
-import {mkdir} from "node:fs/promises";
-import {Log} from "../log/index.js";
+import {access, writeFile} from 'fs/promises';
+import {BuildError, BuildErrorNumber} from './index.js';
+import {Reporter} from '@franzzemen/pipeline';
 
-export function createFile(log: Log, contents: string, file: string, errorOnExists = true): Promise<boolean> {
+
+export function createFile(log: Reporter, contents: string, file: string, errorOnExists = true): Promise<boolean> {
   return access(file)
     .then(() => {
       // Directory exists

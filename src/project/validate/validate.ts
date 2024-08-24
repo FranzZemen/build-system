@@ -10,10 +10,10 @@ import {
   ValidationSchema,
   ValidatorConstructorOptions
 } from "fastest-validator";
-import {Log} from "../log/index.js";
 import {inspect} from "node:util";
 import {getValidator} from "./get-validator.cjs";
 import {BuildError} from "../util/index.js";
+import {Reporter} from '@franzzemen/pipeline';
 
 export type ValidatedTypeName = 'unknown' | 'package' | 'build-config';
 
@@ -28,7 +28,7 @@ export function compileSync(schema: ValidationSchema, validatorOptions?: Validat
   if(checkFunctionIsSync(checkFunction)) {
     return checkFunction;
   } else {
-    const log: Log = new Log();
+    const log: Reporter = new Reporter();
     const errorMsg ='Schema does not compile to SyncCheckFunction (async)';
     log.error(errorMsg);
     log.warn(inspect(schema,false,10,true));
@@ -41,7 +41,7 @@ export function validate<T>(t: T | unknown, checkFunction: SyncCheckFunction, va
   if(result === true) {
     return true;
   } else if(throwIfInvalid) {
-    const log: Log = new Log();
+    const log: Reporter = new Reporter();
     const name = t
     const errorMsg = `Validation failure for object type ${validatedTypeName}`;
     log.error(errorMsg);

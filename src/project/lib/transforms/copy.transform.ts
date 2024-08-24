@@ -9,7 +9,7 @@ import {mkdir} from 'node:fs/promises';
 import {join, dirname} from 'node:path';
 import {cwd} from 'node:process';
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
-import {TransformPayload} from "../../pipeline/index.js";
+import {TransformPayload} from '@franzzemen/pipeline';
 
 
 export type CopyPayload = {
@@ -45,7 +45,7 @@ export class CopyTransform extends TransformPayload<CopyPayload> {
           const sourceFileName = join(currentWorkingDirectory, payload.src, file);
           const destFileName = join(currentWorkingDirectory, payload.dest, file);
           const destDirectory = dirname(destFileName);
-          this.contextLog.debug(`copying from ${sourceFileName} to ${destFileName}`, 'context');
+          this.contextReporter.debug(`copying from ${sourceFileName} to ${destFileName}`, 'context');
           sourceFileNames.push(sourceFileName);
           copyPromises.push(mkdir(destDirectory, {recursive: true}).then(()=> copyFile(sourceFileName, destFileName)));
         });
@@ -56,14 +56,14 @@ export class CopyTransform extends TransformPayload<CopyPayload> {
             results.forEach((result,index) => {
               if (result.status === 'rejected') {
                 errors.push(new BuildError(`Error copying file ${sourceFileNames[index]}`, {cause: result.reason}, BuildErrorNumber.CopyFileError))
-                this.contextLog.error(result.reason);
+                this.contextReporter.error(result.reason);
               }
               backoutSteps.splice(0, 0, 'clean output for copied json');
             });
             if(errors.length) {
               const err = new BuildError('Errors copying files: ', {cause: errors}, BuildErrorNumber.CopyFilesError);
-              this.contextLog.error(err);
-              errors.forEach(error => this.contextLog.error(error));
+              this.contextReporter.error(err);
+              errors.forEach(error => this.contextReporter.error(error));
               throw err;
             }
             return;

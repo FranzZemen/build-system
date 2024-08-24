@@ -3,12 +3,12 @@ Created by Franz Zemen 02/23/2024
 License Type: MIT
 */
 
-import {Pipeline} from "../../pipeline/index.js";
 import {ReadJsonToPackageTransform} from "../transforms/read-json-to-package.transform.js";
 import {Package, packageIsEsmPackage} from "../../validate/index.js";
 import {MaleatePackageTransform} from "../transforms/maleate-package.transform.js";
 import {MaleateObjectTransform} from "../transforms/maleate-object.transform.js";
 import {WriteObjectToJsonTransform} from "../transforms/write-object-to-json.transform.js";
+import {Pipeline} from '@franzzemen/pipeline';
 
 export const packagePipeline = Pipeline
   .options({name: 'packagePipeline', logDepth: 0})

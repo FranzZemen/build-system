@@ -3,78 +3,77 @@ Created by Franz Zemen 03/09/2024
 License Type: MIT
 */
 
-import {cwd} from "node:process";
-import {Task} from "../../pipeline/index.js";
-import {Log} from "../../log/index.js";
-import {analyze, BuildSystemAnalysis} from "../../util/index.js";
+import {cwd} from 'node:process';
+import {analyze, BuildSystemAnalysis} from '../../util/index.js';
 import {confirm} from '@inquirer/prompts';
+import {Reporter, Task} from '@franzzemen/pipeline';
 
-export const checkNewProject: Task<void, boolean> = async (log: Log, rollbackSteps: string[]): Promise<boolean> => {
-  log.warn(`***** Current directory is ${cwd()}`);
-  log.warn(`***** Make sure this is where you want to initialize your project before proceeding`);
+export const checkNewProject: Task<void, boolean> = async (reporter: Reporter, rollbackSteps: string[]): Promise<boolean> => {
+  reporter.warn(`***** Current directory is ${cwd()}`);
+  reporter.warn(`***** Make sure this is where you want to initialize your project before proceeding`);
 
-  log.info('\r\nA new project may be a git repository');
-  log.info('\r\nA new project may not contain:');
-  log.info('  - a package.json file');
-  log.info('  - a tsconfig.json file');
-  log.info('  - a tsconfig.base.json file');
-  log.info('  - a node_modules directory');
-  log.info('  - a project directory');
-  log.info('\r\nA new project may contain:');
-  log.info('  - a .gitignore file');
-  log.info('  - a LICENSE file');
-  log.info('  - a README.md file');
-  log.info('\r\nAll other files and directories are ignored\r\n');
+  reporter.info('\r\nA new project may be a git repository');
+  reporter.info('\r\nA new project may not contain:');
+  reporter.info('  - a package.json file');
+  reporter.info('  - a tsconfig.json file');
+  reporter.info('  - a tsconfig.base.json file');
+  reporter.info('  - a node_modules directory');
+  reporter.info('  - a project directory');
+  reporter.info('\r\nA new project may contain:');
+  reporter.info('  - a .gitignore file');
+  reporter.info('  - a LICENSE file');
+  reporter.info('  - a README.md file');
+  reporter.info('\r\nAll other files and directories are ignored\r\n');
 
 
   const analysis: BuildSystemAnalysis = await analyze();
   let proceed = true;
   if (analysis.ignoreExists) {
-    log.info('A ./.ignore file exists.  Any required entries will be appended starting with token ".\\bs.token"',
-             'task-internal');
+    reporter.info('A ./.ignore file exists.  Any required entries will be appended starting with token ".\\bs.token"',
+                  'task-internal');
   }
   if (analysis.licenseExists) {
-    log.info('A ./LICENSE file exists.  A new LICENSE file will not be created (that\'s ok)');
+    reporter.info('A ./LICENSE file exists.  A new LICENSE file will not be created (that\'s ok)');
   }
   if (analysis.readmeExists) {
-    log.info(
+    reporter.info(
       'A ./README.md file exists.  A new README.md file will not be created.  Any  documentation will be appended to a section titled "##Build System"');
   }
   if (analysis.gitInitialized) {
-    log.info('A git repository exists.  Git will not be re-initialized (that\'s ok)', 'task-internal');
+    reporter.info('A git repository exists.  Git will not be re-initialized (that\'s ok)', 'task-internal');
   }
   if (analysis.packageJsonExists) {
-    log.warn('A ./package.json file exists.  Initialization will not proceed');
+    reporter.warn('A ./package.json file exists.  Initialization will not proceed');
     proceed = false;
   }
   if (analysis.tsconfigJsonExists) {
-    log.warn('A ./tsconfig.json file exists.  Initialization will not proceed');
+    reporter.warn('A ./tsconfig.json file exists.  Initialization will not proceed');
     proceed = false;
   }
   if (analysis.tsconfigBaseJsonExists) {
-    log.warn('A ./tsconfig.base.json file exists.  Initialization will not proceed');
+    reporter.warn('A ./tsconfig.base.json file exists.  Initialization will not proceed');
     proceed = false;
   }
   if (analysis.nodeModulesExists) {
-    log.warn('A ./node_modules directory exists.  Initialization will not proceed');
+    reporter.warn('A ./node_modules directory exists.  Initialization will not proceed');
     proceed = false;
   }
   if (analysis.srcDirectoryExists) {
-    log.warn('A ./src directory exists.  Initialization will not proceed');
+    reporter.warn('A ./src directory exists.  Initialization will not proceed');
     proceed = false;
   }
 
 
-  log.info();
-  log.warn(`***** Current directory is ${cwd()}`);
-  log.warn(`***** Make sure this is where you want to initialize your project before proceeding`);
-  log.info();
+  reporter.info();
+  reporter.warn(`***** Current directory is ${cwd()}`);
+  reporter.warn(`***** Make sure this is where you want to initialize your project before proceeding`);
+  reporter.info();
 
-  if(proceed) {
+  if (proceed) {
     return confirm({message: 'Minimum requirements met to initialize a new project.  Proceed?'})
       .then(proceed => {
         if (!proceed) {
-          log.warn('Not proceeding with new project initialization.');
+          reporter.warn('Not proceeding with new project initialization.');
         }
         return proceed
       });

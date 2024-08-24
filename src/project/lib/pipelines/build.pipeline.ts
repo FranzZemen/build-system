@@ -4,12 +4,12 @@ License Type: MIT
 */
 
 
-import {Pipeline} from "../../pipeline/index.js";
 import {cleanPipeline} from "./clean.pipeline.js";
 import {transpilePipeline} from "./transpile.pipeline.js";
 import {packagePipeline} from "./package.pipeline.js";
 import {copyJsonPipeline} from "./copy-json.pipeline.js";
 import {copyJsPipeline} from './copy-js.pipeline.js';
+import {Pipeline} from '@franzzemen/pipeline';
 
 export const buildPipeline = Pipeline.options({name: 'build', logDepth: 0});
 buildPipeline.append(cleanPipeline);

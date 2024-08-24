@@ -3,15 +3,15 @@ Created by Franz Zemen 03/22/2024
 License Type: MIT
 */
 
-import {TransformIndependent} from "../../pipeline/index.js";
 import {Executable, ExecutablePayload} from "../../util/index.js";
+import {TransformIndependent} from '@franzzemen/pipeline';
 
 export class MochaTransform extends TransformIndependent {
   protected executable: Executable<ExecutablePayload>;
 
   constructor(depth: number) {
     super(depth);
-    this.executable = new Executable<ExecutablePayload>(this.contextLog);
+    this.executable = new Executable<ExecutablePayload>(this.contextReporter);
 
   }
 

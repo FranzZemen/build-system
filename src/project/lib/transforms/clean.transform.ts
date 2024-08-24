@@ -3,8 +3,8 @@ Created by Franz Zemen 02/22/2024
 License Type: MIT
 */
 
-import {TransformIndependent} from "../../pipeline/index.js";
 import {deleteAsync} from "del";
+import {TransformIndependent} from '@franzzemen/pipeline';
 
 export class CleanTransform extends TransformIndependent {
   constructor(depth: number) {

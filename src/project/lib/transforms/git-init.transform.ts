@@ -3,9 +3,9 @@ Created by Franz Zemen 03/09/2024
 License Type: MIT
 */
 
-import {TransformInOut} from "../../pipeline/index.js";
 import {BuildSystemAnalysis} from "../../util/index.js";
 import {simpleGit, SimpleGit} from "simple-git";
+import {TransformInOut} from '@franzzemen/pipeline';
 
 export class GitInitTransform extends TransformInOut<BuildSystemAnalysis, BuildSystemAnalysis> {
   constructor(depth: number) {
@@ -14,12 +14,12 @@ export class GitInitTransform extends TransformInOut<BuildSystemAnalysis, BuildS
 
   protected override async executeImplInOut(rollbackSteps: string[], analysis: BuildSystemAnalysis): Promise<BuildSystemAnalysis> {
     if(analysis.gitInitialized) {
-      this.contextLog.warn('Git already initialized, skipping');
+      this.contextReporter.warn('Git already initialized, skipping');
     } else {
       const git: SimpleGit = simpleGit();
 
       const result = await git.init();
-      this.contextLog.info(result, 'task-internal');
+      this.contextReporter.info(result, 'task-internal');
       rollbackSteps.splice(0, 0, 'rollback git init');
 
 

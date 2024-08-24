@@ -4,7 +4,7 @@ License Type: MIT
 */
 
 import {Executable, ExecutablePayload, readFileAsJson} from '../../util/index.js';
-import {TransformIndependent} from "../../pipeline/index.js";
+import {TransformIndependent} from '@franzzemen/pipeline';
 
 
 /**
@@ -16,7 +16,7 @@ export class NpmPublishTransform extends TransformIndependent {
 
   constructor(depth: number) {
     super(depth);
-    this.executable = new Executable<ExecutablePayload>(this.contextLog);
+    this.executable = new Executable<ExecutablePayload>(this.contextReporter);
   }
 
   protected override transformContext(pipeIn?: any, payload?: undefined): string | object {
