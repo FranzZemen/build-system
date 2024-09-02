@@ -31,7 +31,7 @@ scaffoldPipeline
       type: ModuleType.module,
       exports: {
         '.': {
-          import: './src/project/import.ts'
+          import: './src/project/index.ts'
         }
       },
     }
