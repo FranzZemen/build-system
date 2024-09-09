@@ -18,16 +18,25 @@ export const packagePipeline = Pipeline
         '.': {
           types: './types/index.d.ts',
           import: './index.js'
+        },
+        './server': {
+          types: './types/server-index.d.ts',
+          import: './server-index.js'
         }
       },
     }} as const)
   // Write the package for publication
   .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const)
+  // Testing package.json
   .transform(MaleateObjectTransform<Package>, {merge: {
       exports: {
         '.': {
           types: './project/types/index.d.ts',
           import: './project/index.js'
+        },
+        './server': {
+          types: './types/server-index.d.ts',
+          import: './server-index.js'
         }
       },
     }} as const)
