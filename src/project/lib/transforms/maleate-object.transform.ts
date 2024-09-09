@@ -5,12 +5,19 @@ License Type:
 
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
 import {Transform} from '@franzzemen/pipeline';
+import objectPath from 'object-path';
 
+export type MergeIf = {
+  ifPath: string[];
+  if: 'exists';
+  merge: any;
+}
 
 export type MaleatePackagePayload = {
   targetPath: string;
   exclusions?: string[];
   merge?: any;
+  mergeIf?: MergeIf;
 };
 
 /**
@@ -33,6 +40,13 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
     }
     if (payload?.merge) {
       pipeIn = {...pipeIn, ...payload.merge};
+    }
+    if(payload?.mergeIf) {
+      if(payload.mergeIf.if === 'exists') {
+        if(objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
+          pipeIn = {...pipeIn, ...payload.mergeIf.merge};
+        }
+      }
     }
     return pipeIn;
   }
