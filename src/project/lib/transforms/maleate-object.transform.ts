@@ -6,7 +6,7 @@ License Type:
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
 import {Transform} from '@franzzemen/pipeline';
 import objectPath from 'object-path';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 export type MergeIf = {
   ifPath: string[];
