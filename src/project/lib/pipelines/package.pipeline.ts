@@ -42,12 +42,20 @@ export const packagePipeline = Pipeline
         '.': {
           types: './project/types/index.d.ts',
           import: './project/index.js'
-        },
-        './server': {
-          types: './types/server-index.d.ts',
-          import: './server-index.js'
         }
-      },
+      }
+    },
+    mergeIf: {
+      if: 'exists',
+      ifPath: ['exports', './server'],
+      merge: {
+        exports: {
+          './server': {
+            types: './project/types/server-index.d.ts',
+            import: './project/server-index.js'
+          }
+        }
+      }
     }
   } as const)
   // Write the package for testing
