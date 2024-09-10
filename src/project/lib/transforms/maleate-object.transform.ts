@@ -51,6 +51,8 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
           this.contextReporter.info(`Path exists. Merging properties`);
           this.contextReporter.info(payload.mergeIf.merge);
           pipeIn = {...pipeIn, ...payload.mergeIf.merge};
+        } else {
+          this.contextReporter.info(`Path does not exist. Skipping merge`);
         }
       }
     }
