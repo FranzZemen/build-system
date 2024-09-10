@@ -35,6 +35,7 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
       this.contextReporter.error(err)
       throw err;
     }
+    this.contextReporter.info(pipeIn);
     if (payload?.exclusions) {
       this.contextReporter.info(`Excluding properties: ${payload.exclusions.join(', ')}`);
       payload.exclusions.forEach(exclusion => delete ((pipeIn as any)[exclusion]));
@@ -44,15 +45,15 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
       this.contextReporter.info(payload.merge);
       pipeIn = {...pipeIn, ...payload.merge};
     }
-    if(payload?.mergeIf) {
-      if(payload.mergeIf.if === 'exists') {
+    if (payload?.mergeIf) {
+      if (payload.mergeIf.if === 'exists') {
         this.contextReporter.info(`Merging properties if path exists: ${payload.mergeIf.ifPath.join('.')}`);
-        if(objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
+        if (objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
           this.contextReporter.info(`Path exists. Merging properties`);
           this.contextReporter.info(payload.mergeIf.merge);
           pipeIn = {...pipeIn, ...payload.mergeIf.merge};
         } else {
-          this.contextReporter.info(`Path does not exist. Skipping merge`);
+          this.contextReporter.info('Path does not exist. Skipping merge');
         }
       }
     }
