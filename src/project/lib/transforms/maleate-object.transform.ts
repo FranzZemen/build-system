@@ -5,12 +5,20 @@ License Type:
 
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
 import {Transform} from '@franzzemen/pipeline';
+import objectPath from 'object-path';
+import _ from 'lodash';
 
+export type MergeIf = {
+  ifPath: string[];
+  if: 'exists';
+  merge: any;
+}
 
 export type MaleatePackagePayload = {
   targetPath: string;
   exclusions?: string[];
   merge?: any;
+  mergeIf?: MergeIf;
 };
 
 /**
@@ -29,10 +37,25 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
       throw err;
     }
     if (payload?.exclusions) {
+      this.contextReporter.info(`Excluding properties: ${payload.exclusions.join(', ')}`);
       payload.exclusions.forEach(exclusion => delete ((pipeIn as any)[exclusion]));
     }
     if (payload?.merge) {
-      pipeIn = {...pipeIn, ...payload.merge};
+      this.contextReporter.info(`Merging properties`);
+      this.contextReporter.info(payload.merge);
+      pipeIn = _.merge(pipeIn, payload.merge);
+    }
+    if (payload?.mergeIf) {
+      if (payload.mergeIf.if === 'exists') {
+        this.contextReporter.info(`Merging properties if path exists: ${payload.mergeIf.ifPath.join('.')}`);
+        if (objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
+          this.contextReporter.info(`Path exists. Merging properties`);
+          this.contextReporter.info(payload.mergeIf.merge);
+          pipeIn = _.merge(pipeIn, payload.mergeIf.merge);
+        } else {
+          this.contextReporter.info('Path does not exist. Skipping merge');
+        }
+      }
     }
     return pipeIn;
   }
