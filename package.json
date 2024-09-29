@@ -1,6 +1,6 @@
 {
   "name": "@franzzemen/build-system",
-  "version": "10.1.9",
+  "version": "11.0.0",
   "description": "Build System",
   "main": "index.js",
   "type": "module",
