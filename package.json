@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@franzzemen/build-system": "file:out/dist",
-    "@franzzemen/pipeline": "^1.0.9",
+    "@franzzemen/pipeline": "^1.2.0",
     "@inquirer/prompts": "^6.0.1",
     "del": "^7.1.0",
     "fast-glob": "^3.3.2",

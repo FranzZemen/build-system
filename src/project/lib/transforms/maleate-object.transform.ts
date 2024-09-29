@@ -18,7 +18,7 @@ export type MaleatePackagePayload = {
   targetPath: string;
   exclusions?: string[];
   merge?: any;
-  mergeIf?: MergeIf;
+  mergeIf?: MergeIf[];
 };
 
 /**
@@ -46,6 +46,19 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
       pipeIn = _.merge(pipeIn, payload.merge);
     }
     if (payload?.mergeIf) {
+      for(const mergeIf of payload.mergeIf) {
+        if (mergeIf.if === 'exists') {
+          this.contextReporter.info(`Merging properties if path exists: ${mergeIf.ifPath.join('.')}`);
+          if (objectPath.get(pipeIn as object, mergeIf.ifPath) !== undefined) {
+            this.contextReporter.info(`Path exists. Merging properties`);
+            this.contextReporter.info(mergeIf.merge);
+            pipeIn = _.merge(pipeIn, mergeIf.merge);
+          } else {
+            this.contextReporter.info('Path does not exist. Skipping merge');
+          }
+        }
+      }
+      /*
       if (payload.mergeIf.if === 'exists') {
         this.contextReporter.info(`Merging properties if path exists: ${payload.mergeIf.ifPath.join('.')}`);
         if (objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
@@ -56,6 +69,8 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
           this.contextReporter.info('Path does not exist. Skipping merge');
         }
       }
+
+       */
     }
     return pipeIn;
   }

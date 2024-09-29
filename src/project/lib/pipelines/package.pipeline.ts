@@ -20,7 +20,7 @@ export const packagePipeline = Pipeline
           import: './index.js'
         }
       }
-    }, mergeIf: {
+    }, mergeIf: [{
       if: 'exists',
       ifPath: ['exports', './server'],
       merge: {
@@ -31,8 +31,14 @@ export const packagePipeline = Pipeline
           }
         }
       }
-    }
-  } as const)
+    },{
+      if: 'exists',
+      ifPath: ['imports', "#test"],
+      merge: {
+        imports: {}
+      }
+    }]
+  })
   // Write the package for publication
   .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const)
   // Testing package.json
@@ -45,7 +51,7 @@ export const packagePipeline = Pipeline
         }
       }
     },
-    mergeIf: {
+    mergeIf: [{
       if: 'exists',
       ifPath: ['exports', './server'],
       merge: {
@@ -56,8 +62,19 @@ export const packagePipeline = Pipeline
           }
         }
       }
-    }
-  } as const)
+    },{
+      if: 'exists',
+      ifPath: ['imports', "#test"],
+      merge: {
+        imports: {
+          '#test': {
+            types: './project/types/test-index.d.ts',
+            import: './project/test-index.js'
+          }
+        }
+      }
+    }]
+  })
   // Write the package for testing
   .transform(WriteObjectToJsonTransform, {targetPath: './out/package.json'} as const)
 
