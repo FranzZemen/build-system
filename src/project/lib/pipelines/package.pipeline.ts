@@ -31,6 +31,17 @@ export const packagePipeline = Pipeline
           }
         }
       }
+    },{
+      if: 'exists',
+      ifPath: ['imports', '#project'],
+      merge: {
+        imports: {
+          '#project': {
+            types: './types/project-index.d.ts',
+            import: './project-index.js'
+          }
+        }
+      }
     }], removeIf: [{
       if: 'exists',
       ifPath: ['imports', '#test']
@@ -69,6 +80,17 @@ export const packagePipeline = Pipeline
           '#test': {
             types: './project/types/test-index.d.ts',
             import: './project/test-index.js'
+          }
+        }
+      }
+    },{
+      if: 'exists',
+      ifPath: ['imports', '#project'],
+      merge: {
+        imports: {
+          '#project': {
+            types: './project/types/project-index.d.ts',
+            import: './project/project-index.js'
           }
         }
       }
