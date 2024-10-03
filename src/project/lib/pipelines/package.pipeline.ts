@@ -36,11 +36,10 @@ export const packagePipeline = Pipeline
       ifPath: ['imports', '#test']
     }]
   })
-  // Read the original package again, ofr different maleation to the test package.json
-  .transform(ReadJsonToPackageTransform, {targetPath: './package.json', tIsT: packageIsEsmPackage} as const)
   // Write the package for publication
   .transform(WriteObjectToJsonTransform, {targetPath: './out/project/package.json'} as const)
-
+  // Read the original package again, ofr different maleation to the test package.json
+  .transform(ReadJsonToPackageTransform, {targetPath: './package.json', tIsT: packageIsEsmPackage} as const)
   // Testing package.json
   .transform(MaleateObjectTransform<Package>, {
     merge: {
