@@ -31,12 +31,9 @@ export const packagePipeline = Pipeline
           }
         }
       }
-    },{
+    }], removeIf: [{
       if: 'exists',
-      ifPath: ['imports', "#test"],
-      merge: {
-        imports: {}
-      }
+      ifPath: ['imports', '#test']
     }]
   })
   // Write the package for publication

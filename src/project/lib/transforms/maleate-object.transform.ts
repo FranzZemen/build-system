@@ -8,6 +8,11 @@ import {Transform} from '@franzzemen/pipeline';
 import objectPath from 'object-path';
 import _ from 'lodash';
 
+export type RemoveIf = {
+  ifPath: string[];
+  if: 'exists';
+}
+
 export type MergeIf = {
   ifPath: string[];
   if: 'exists';
@@ -19,6 +24,7 @@ export type MaleatePackagePayload = {
   exclusions?: string[];
   merge?: any;
   mergeIf?: MergeIf[];
+  removeIf?: RemoveIf[];
 };
 
 /**
@@ -58,19 +64,19 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
           }
         }
       }
-      /*
-      if (payload.mergeIf.if === 'exists') {
-        this.contextReporter.info(`Merging properties if path exists: ${payload.mergeIf.ifPath.join('.')}`);
-        if (objectPath.get(pipeIn as object, payload.mergeIf.ifPath) !== undefined) {
-          this.contextReporter.info(`Path exists. Merging properties`);
-          this.contextReporter.info(payload.mergeIf.merge);
-          pipeIn = _.merge(pipeIn, payload.mergeIf.merge);
-        } else {
-          this.contextReporter.info('Path does not exist. Skipping merge');
+    }
+    if(payload?.removeIf) {
+      for(const removeIf of payload.removeIf) {
+        if (removeIf.if === 'exists') {
+          this.contextReporter.info(`Removing properties if path exists: ${removeIf.ifPath.join('.')}`);
+          if (objectPath.get(pipeIn as object, removeIf.ifPath) !== undefined) {
+            this.contextReporter.info(`Path exists. Removing properties`);
+            objectPath.del(pipeIn as object, removeIf.ifPath);
+          } else {
+            this.contextReporter.info('Path does not exist. Skipping remove');
+          }
         }
       }
-
-       */
     }
     return pipeIn;
   }
