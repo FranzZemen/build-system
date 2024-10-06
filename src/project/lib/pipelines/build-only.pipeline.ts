@@ -11,9 +11,9 @@ import {copyJsonPipeline} from "./copy-json.pipeline.js";
 import {copyJsPipeline} from './copy-js.pipeline.js';
 import {Pipeline} from '@franzzemen/pipeline';
 
-export const buildNoCleanPipeline = Pipeline.options({name: 'build', logDepth: 0});
-buildNoCleanPipeline.append(transpilePipeline);
-buildNoCleanPipeline.append(copyJsPipeline);
-buildNoCleanPipeline.append(packagePipeline);
-buildNoCleanPipeline.append(copyJsonPipeline);
+export const buildOnlyPipeline = Pipeline.options({name: 'build', logDepth: 0});
+buildOnlyPipeline.append(transpilePipeline);
+buildOnlyPipeline.append(copyJsPipeline);
+buildOnlyPipeline.append(packagePipeline);
+buildOnlyPipeline.append(copyJsonPipeline);
 

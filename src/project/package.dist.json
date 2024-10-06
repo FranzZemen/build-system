@@ -42,7 +42,7 @@
     "bs.transpile": "./bin/transpile.js",
     "bs.package": "./bin/package.js",
     "bs.build": "./bin/build.js",
-    "bs.build-c": "./bin/build-c.js",
+    "bs.build-only": "./bin/build-only.js",
     "bs.test": "./bin/test.js",
     "bs.test-only": "./bin/test-only.js",
     "bs.commit": "./bin/commit.js",
