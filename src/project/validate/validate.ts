@@ -45,8 +45,8 @@ export function validate<T>(t: T | unknown, checkFunction: SyncCheckFunction, va
     const log: Reporter = new Reporter();
     const name = t
     const errorMsg = `Validation failure for object type ${validatedTypeName}`;
-    log.error(errorMsg);
     log.warn(inspect(result, false, 10, true));
+    log.error(errorMsg);
     throw new BuildError(errorMsg);
   } else {
     return result;
