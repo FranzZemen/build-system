@@ -8,9 +8,10 @@ import {SyncCheckFunction, ValidationSchema} from "fastest-validator";
 import semverRegex from "semver-regex";
 import {compileSync, validate} from "./validate.js";
 import {Version} from "../util/semver.js";
-import _ from "lodash";
 import {tIsT} from "./t-is-T.js";
 import {packageNameRegex} from 'package-name-regex';
+import {merge} from '../util/merge.js';
+
 
 export type ConditionalExportKeys =
   'require'
@@ -103,9 +104,10 @@ const basePackageJSONSchema: ValidationSchema = {
 }
 const basePackageCheck: SyncCheckFunction = compileSync(basePackageJSONSchema);
 
-const esmPackageJSONSchema: ValidationSchema = _.merge({}, basePackageJSONSchema, {
-  type: {type: "string", regex: "/^module$/"}
-});
+const esmPackageJSONSchema: ValidationSchema = merge({}, basePackageJSONSchema);
+esmPackageJSONSchema['type'] = {type: "string", pattern: "/^module$/"};
+
+
 const esmPackageCheck: SyncCheckFunction = compileSync(esmPackageJSONSchema);
 
 export const packageIsBasePackage: tIsT<Package> = function packageIsBasePackage(packageJSON: Package | unknown, throwIfNot = true): packageJSON is Package  {

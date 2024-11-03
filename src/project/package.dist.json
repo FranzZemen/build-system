@@ -23,7 +23,7 @@
     "del": "^7.1.0",
     "fast-glob": "^3.3.2",
     "fastest-validator": "^1.19.0",
-    "lodash": "^4.17.21",
+    "lodash.mergewith": "^4.6.2",
     "object-path": "^0.11.8",
     "package-name-regex": "^4.0.0",
     "semver-regex": "^4.0.5",

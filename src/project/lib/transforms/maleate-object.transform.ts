@@ -6,7 +6,7 @@ License Type:
 import {BuildError, BuildErrorNumber} from '../../util/index.js';
 import {Transform} from '@franzzemen/pipeline';
 import objectPath from 'object-path';
-import _ from 'lodash';
+import {merge} from '../../util/merge.js';
 
 export type RemoveIf = {
   ifPath: string[];
@@ -49,7 +49,7 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
     if (payload?.merge) {
       this.contextReporter.info(`Merging properties`);
       this.contextReporter.info(payload.merge);
-      pipeIn = _.merge(pipeIn, payload.merge);
+      pipeIn = merge(pipeIn, payload.merge);
     }
     if (payload?.mergeIf) {
       for(const mergeIf of payload.mergeIf) {
@@ -58,7 +58,7 @@ export class MaleateObjectTransform<T> extends Transform<MaleatePackagePayload, 
           if (objectPath.get(pipeIn as object, mergeIf.ifPath) !== undefined) {
             this.contextReporter.info(`Path exists. Merging properties`);
             this.contextReporter.info(mergeIf.merge);
-            pipeIn = _.merge(pipeIn, mergeIf.merge);
+            pipeIn = merge(pipeIn, mergeIf.merge);
           } else {
             this.contextReporter.info('Path does not exist. Skipping merge');
           }
