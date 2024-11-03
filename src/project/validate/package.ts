@@ -105,7 +105,7 @@ const basePackageJSONSchema: ValidationSchema = {
 const basePackageCheck: SyncCheckFunction = compileSync(basePackageJSONSchema);
 
 const esmPackageJSONSchema: ValidationSchema = merge({}, basePackageJSONSchema);
-esmPackageJSONSchema['type'] = {type: "string", pattern: "/^module$/"};
+esmPackageJSONSchema['type'] = {type: "string", pattern: /^module$/};
 
 
 const esmPackageCheck: SyncCheckFunction = compileSync(esmPackageJSONSchema);
