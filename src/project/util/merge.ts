@@ -13,6 +13,6 @@ function customizer(objValue:any, srcValue:any) {
   }
   return undefined;
 }
-export function merge(dest:any, src:any):any {
-  return mergeWith(dest, src, customizer);
+export function merge(dest:any, ...src:any[]):any {
+  return mergeWith(dest, ...src, customizer);
 }
