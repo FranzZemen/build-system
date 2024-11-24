@@ -34,6 +34,11 @@ scaffoldPipeline
           import: './src/project/index.ts'
         }
       },
+      imports: {
+        '#project': {
+          import: './src/project/project-index.ts'
+        }
+      },
     }
   })
   .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore});
