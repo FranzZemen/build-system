@@ -17,6 +17,8 @@ import {Pipeline} from '@franzzemen/pipeline';
 import {indexTs} from '../../template/_index.js';
 import {projectIndexTs} from '../../template/project-index.js';
 import {dummyTestTs} from '../../template/dummy.test.js';
+import {ExecutableTransform} from '../transforms/index.js';
+import {ExecutablePayload} from '../../util/index.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
@@ -25,8 +27,8 @@ scaffoldPipeline
   .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform, {path: './src/test'})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.base.json', input: tsConfigBase})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.json', input: tsconfigRoot})
- // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigProject})
- // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/test/tsconfig.json', input: tsConfigTest})
+  // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigProject})
+  // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/test/tsconfig.json', input: tsConfigTest})
   .transform<MaleatePackageTransform, MaleatePackagePayload>(MaleatePackageTransform, {
     targetPath: './package.json',
     exclusions: ['main'],
@@ -44,7 +46,17 @@ scaffoldPipeline
       },
     }
   })
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project/index.ts', contents: indexTs})
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project/project-index.ts', contents: projectIndexTs})
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/test/dummy.test.ts', contents: dummyTestTs})
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore});
+  .transform<WriteFileTransform, WriteFilePayload>(WriteFileTransform, {target: './src/project/index.ts', contents: indexTs})
+  .transform<WriteFileTransform, WriteFilePayload>(WriteFileTransform, {target: './src/project/project-index.ts', contents: projectIndexTs})
+  .transform<WriteFileTransform, WriteFilePayload>(WriteFileTransform, {target: './src/test/dummy.test.ts', contents: dummyTestTs})
+  .transform<WriteFileTransform, WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore})
+  .transform<ExecutableTransform, ExecutablePayload>(ExecutableTransform,{
+    executable: 'npm',
+    // arguments: ['-b'],
+    arguments: [`i`,`typescript`,`mocha`,`chai`,`@types/mocha`,`@types/chai` ],
+    stderrTreatment: "error",
+    stdioTreatment: "task-detail",
+    batchTarget: false,
+    synchronous: true
+  });
+
