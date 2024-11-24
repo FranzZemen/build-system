@@ -53,7 +53,7 @@ scaffoldPipeline
   .transform<ExecutableTransform, ExecutablePayload>(ExecutableTransform,{
     executable: 'npm',
     // arguments: ['-b'],
-    arguments: [`i`,`typescript`,`mocha`,`chai`,`@types/mocha`,`@types/chai` ],
+    arguments: [`i`,`--save-dev`,`typescript`,`mocha`,`chai`,`@types/mocha`,`@types/chai` ],
     stderrTreatment: "error",
     stdioTreatment: "task-detail",
     batchTarget: false,
