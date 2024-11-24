@@ -3,7 +3,7 @@ Created by Franz Zemen 02/18/2024
 License Type: MIT
 */
 
-
+/*
 export const tsconfigRoot = {
   extends: './tsconfig.base.json',
   compilerOptions: {
@@ -15,11 +15,13 @@ export const tsconfigRoot = {
     rootDir: './src',
     outDir: './out'
   },
-  include: [
-    '**/*'
-  ]
-}
-/*
+
+  */
+  //include: [
+  //  '**/*'
+  //]
+//}
+
 export const tsconfigRoot = {
   "files": [],
   "include": [],
@@ -32,4 +34,3 @@ export const tsconfigRoot = {
     }
   ]
 };
-*/

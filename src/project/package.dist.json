@@ -3,6 +3,39 @@
   "version": "14.0.5",
   "description": "Build System",
   "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./out/project/types/index.d.js",
+      "import": "./out/project/index.js"
+    }
+  },
+  "imports": {
+    "#project": {
+      "types": "./out/project/types/project-index.d.js",
+      "import": "./out/project/project-index.js"
+    }
+  },
+  "bin": {
+    "bs.get-package-config": "./bin/get-package-config.js",
+    "bs.init": "./bin/init.js",
+    "bs.analyze": "./bin/analyze.js",
+    "bs.clean": "./bin/clean.js",
+    "bs.transpile": "./bin/transpile.js",
+    "bs.package": "./bin/package.js",
+    "bs.build": "./bin/build.js",
+    "bs.build-only": "./bin/build-only.js",
+    "bs.test": "./bin/test.js",
+    "bs.test-only": "./bin/test-only.js",
+    "bs.commit": "./bin/commit.js",
+    "bs.push": "./bin/push.js",
+    "bs.patch": "./bin/patch.js",
+    "bs.minor": "./bin/minor.js",
+    "bs.major": "./bin/major.js",
+    "bs.publish": "./bin/publish.js",
+    "bs.scaffold": "./bin/scaffold.js",
+    "bs.ncu": "./bin/ncu.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FranzZemen/build-system.git"
@@ -32,26 +65,5 @@
     "tsconfig.d.ts": "^0.1.20",
     "tslib": "^2.8.1",
     "uuid": "^11.0.3"
-  },
-  "type": "module",
-  "bin": {
-    "bs.get-package-config": "./bin/get-package-config.js",
-    "bs.init": "./bin/init.js",
-    "bs.analyze": "./bin/analyze.js",
-    "bs.clean": "./bin/clean.js",
-    "bs.transpile": "./bin/transpile.js",
-    "bs.package": "./bin/package.js",
-    "bs.build": "./bin/build.js",
-    "bs.build-only": "./bin/build-only.js",
-    "bs.test": "./bin/test.js",
-    "bs.test-only": "./bin/test-only.js",
-    "bs.commit": "./bin/commit.js",
-    "bs.push": "./bin/push.js",
-    "bs.patch": "./bin/patch.js",
-    "bs.minor": "./bin/minor.js",
-    "bs.major": "./bin/major.js",
-    "bs.publish": "./bin/publish.js",
-    "bs.scaffold": "./bin/scaffold.js",
-    "bs.ncu": "./bin/ncu.js"
   }
 }

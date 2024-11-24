@@ -19,6 +19,8 @@ import {projectIndexTs} from '../../template/project-index.js';
 import {dummyTestTs} from '../../template/dummy.test.js';
 import {ExecutableTransform} from '../transforms/index.js';
 import {ExecutablePayload} from '../../util/index.js';
+import {tsConfigProject} from '../../template/tsconfig.project.js';
+import {tsConfigTest} from '../../template/tsconfig.test.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
@@ -27,8 +29,8 @@ scaffoldPipeline
   .transform<CreateDirectoryTransform, CreateDirectoryPayload>(CreateDirectoryTransform, {path: './src/test'})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.base.json', input: tsConfigBase})
   .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './tsconfig.json', input: tsconfigRoot})
-  // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigProject})
-  // .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/test/tsconfig.json', input: tsConfigTest})
+  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/project/tsconfig.json', input: tsConfigProject})
+  .transform<WriteObjectToJsonTransform, WriteObjectFileNamePayload>(WriteObjectToJsonTransform, {targetPath: './src/test/tsconfig.json', input: tsConfigTest})
   .transform<MaleatePackageTransform, MaleatePackagePayload>(MaleatePackageTransform, {
     targetPath: './package.json',
     exclusions: ['main'],
