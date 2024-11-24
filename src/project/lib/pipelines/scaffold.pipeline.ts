@@ -44,7 +44,7 @@ scaffoldPipeline
       },
     }
   })
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project', contents: indexTs})
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project', contents: projectIndexTs})
-  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/test', contents: dummyTestTs})
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project/index.ts', contents: indexTs})
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project/project-index.ts', contents: projectIndexTs})
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/test/dummy.test.ts', contents: dummyTestTs})
   .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore});
