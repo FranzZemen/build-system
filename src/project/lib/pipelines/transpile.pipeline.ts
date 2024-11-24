@@ -9,7 +9,8 @@ import {Pipeline} from '@franzzemen/pipeline';
 
 export const transpilePayload: ExecutablePayload = {
   executable: 'tsc',
-  arguments: ['-b'],
+  // arguments: ['-b'],
+  arguments: [],
   stderrTreatment: "error",
   stdioTreatment: "task-detail",
   batchTarget: false,

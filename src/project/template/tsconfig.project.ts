@@ -1,3 +1,4 @@
+/*
 export const tsConfigProject = {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
@@ -8,5 +9,7 @@ export const tsConfigProject = {
     "declarationDir": "../../out/project/types",
     "outDir": "../../out/project"
   },
-  "include": ["**/*"]
-}
+
+ */
+  //"include": ["**/*"]
+//}
