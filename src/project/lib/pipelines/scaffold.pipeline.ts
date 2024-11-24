@@ -14,6 +14,9 @@ import {ModuleType} from '../../validate/index.js';
 import {WriteFilePayload, WriteFileTransform} from '../transforms/write-file.transform.js';
 import {gitignore} from '../../template/.gitignore.js';
 import {Pipeline} from '@franzzemen/pipeline';
+import {indexTs} from '../../template/_index.js';
+import {projectIndexTs} from '../../template/project-index.js';
+import {dummyTestTs} from '../../template/dummy.test.js';
 
 
 export const scaffoldPipeline = Pipeline.options({name: 'scaffold', logDepth: 0});
@@ -41,4 +44,7 @@ scaffoldPipeline
       },
     }
   })
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project', contents: indexTs})
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/project', contents: projectIndexTs})
+  .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: './src/test', contents: dummyTestTs})
   .transform<WriteFileTransform,WriteFilePayload>(WriteFileTransform, {target: '.gitignore', contents: gitignore});
