@@ -27,7 +27,7 @@
     "@types/uuid": "^10.0.0",
     "chai": "^5.1.2",
     "mocha": "^11.0.1",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "@franzzemen/build-system": "file:out/dist",
@@ -44,7 +44,7 @@
     "spdx-license-ids": "^3.0.20",
     "tsconfig.d.ts": "^0.1.20",
     "tslib": "^2.8.1",
-    "uuid": "^11.0.4"
+    "uuid": "^11.0.5"
   },
   "scripts": {
     "patch": "tsc -p src/project/tsconfig.json && tsc -b && node out/build/patch.js",
